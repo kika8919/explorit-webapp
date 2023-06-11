@@ -1,8 +1,34 @@
-<nav class="navbar navbar-light">
+<!-- <div class="toolbar" role="banner">
+  <span>Dashboard</span>
+  <div class="spacer"></div>
+</div> -->
+<mat-toolbar class="toolbar">
+  <div class="toolbar-space"></div>
+
+  <!-- <button mat-icon-button (click)="openSidenav()"> -->
+  <!-- <mat-icon>menu</mat-icon> -->
+  <!-- </button> -->
+  <a routerLink="/"><span>Xplorit</span></a>
+  <span class="example-spacer"></span>
+  <div class="nav-right">
+    <a routerLink="/"> Home </a>
+    <a routerLink="/login" routerLinkActive="active"> Login </a>
+    <a
+      routerLink="/register"
+      routerLinkActive="active"
+      style="text-decoration: none"
+    >
+      Register
+    </a>
+  </div>
+  <div class="toolbar-space"></div>
+</mat-toolbar>
+
+<!-- <nav class="navbar navbar-light">
   <div class="container">
     <a class="navbar-brand" routerLink="/">conduit</a>
 
-    <!-- Show this for logged out users -->
+    
     <ul *appShowAuthed="false"
       class="nav navbar-nav pull-xs-right">
 
@@ -31,7 +57,7 @@
 
     </ul>
 
-    <!-- Show this for logged in users -->
+  
     <ul *appShowAuthed="true"
       class="nav navbar-nav pull-xs-right">
 
@@ -72,4 +98,4 @@
     </ul>
 
   </div>
-</nav>
+</nav> -->
