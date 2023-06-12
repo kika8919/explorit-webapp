@@ -14,6 +14,7 @@ mat-form-field {
   justify-content: center;
   align-items: center;
   justify-items: center;
+  height: calc(100% - 12vh);
 }
 
 .customer-form {
@@ -21,5 +22,9 @@ mat-form-field {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 25rem;
+  width: 20rem;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  margin-bottom: -1.25em;
 }
