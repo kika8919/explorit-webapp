@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
   ) {
     // use FormBuilder to create a form group
     this.authForm = this.fb.group({
-      email: ['', Validators.required],
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: ['', Validators.required],
     });
   }
@@ -48,7 +48,14 @@ export class AuthComponent implements OnInit {
       this.title = this.authType === 'login' ? 'Sign in' : 'Sign up';
       // add form control for username if this is the register page
       if (this.authType === 'register') {
-        this.authForm.addControl('username', new FormControl());
+        this.authForm.addControl(
+          'firstName',
+          new FormControl('', [Validators.required])
+        );
+        this.authForm.addControl(
+          'lastName',
+          new FormControl('', [Validators.required])
+        );
       }
       this.cd.markForCheck();
     });
@@ -59,13 +66,26 @@ export class AuthComponent implements OnInit {
     this.errors = { errors: {} };
 
     const credentials = this.authForm.value;
-    this.userService.attemptAuth(this.authType, credentials).subscribe(
-      (data) => this.router.navigateByUrl('/'),
-      (err) => {
-        this.errors = err;
+    this.userService.attemptAuth(this.authType, credentials).subscribe({
+      next: (data) => {
+        if (this.authType === 'login') {
+          this.router.navigateByUrl('/');
+        } else if (this.authType === 'register') {
+          this.router.navigateByUrl('/login');
+        }
+      },
+      error: (err) => {
+        this.authForm.reset();
+        if (this.authType === 'login') {
+          this.errors = { errors: { Incorrect: 'credentials' } };
+        } else if (this.authType === 'register') {
+          this.errors = { errors: { Please: 'try again' } };
+        }
         this.isSubmitting = false;
-        this.cd.markForCheck();
-      }
-    );
+      },
+    });
+  }
+  get f() {
+    return this.authForm.controls;
   }
 }

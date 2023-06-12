@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { FooterComponent, HeaderComponent, SharedModule } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -17,6 +18,7 @@ import { CoreModule } from './core/core.module';
     HomeModule,
     AuthModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
