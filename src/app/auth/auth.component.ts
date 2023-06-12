@@ -17,6 +17,7 @@ import { Errors, UserService } from '../core';
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent implements OnInit {

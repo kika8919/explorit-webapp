@@ -1,9 +1,9 @@
 <div class="example-container">
-  <mat-card class="customer-form">
-    <mat-card-header
+  <div class="customer-form" layout="row" layout-align="center center">
+    <span
       ><h1>
         {{ title }}
-      </h1></mat-card-header
+      </h1></span
     >
     <p>
       <a [routerLink]="['/login']" *ngIf="authType === 'register'"
@@ -13,7 +13,7 @@
         >Need an account?</a
       >
     </p>
-    <mat-card-content>
+    <div>
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
         <mat-form-field appearance="outline" *ngIf="authType == 'register'">
           <mat-label>Firstname</mat-label>
@@ -84,7 +84,7 @@
         >
           {{ authType == "login" ? "Login" : "Sign-up" }}
         </button>
-      </form></mat-card-content
-    >
-  </mat-card>
+      </form>
+    </div>
+  </div>
 </div>
