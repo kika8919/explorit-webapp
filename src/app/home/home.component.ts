@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { UserService } from '../core';
+import { Category, HomeService, UserService } from '../core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,12 +15,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  selectedPlace!: string;
-  places: string[] = ['Beaches', 'Mountains', 'Cultural'];
+  selectedCategory!: Category;
+  categories!: Category[];
 
   constructor(
+    private homeSvc: HomeService,
     private router: Router,
-
     private userService: UserService,
     private cd: ChangeDetectorRef
   ) {}
@@ -29,22 +29,26 @@ export class HomeComponent implements OnInit {
     this.userService.isAuthenticated.subscribe((authenticated) => {
       this.isAuthenticated = authenticated;
     });
+    this.getCategories();
+  }
+  getCategories() {
+    this.homeSvc.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data.map(({ _id, categoryName, description }) => {
+          return { _id, categoryName, description };
+        });
+      },
+      error: (error) => {},
+    });
   }
 
-  getDescription(place: string): string {
-    // Add your descriptions for each place
-    switch (place) {
-      case 'Beaches':
-        return 'Experience the tranquility and beauty of sandy beaches, where you can relax and enjoy the sun and sea.';
-      case 'Mountains':
-        return 'Embark on thrilling adventures amidst majestic mountains, offering breathtaking views and serenity.';
-      case 'Cultural':
-        return 'Immerse yourself in the vibrant cultures and traditions, visiting historical landmarks and engaging in local customs.';
-      default:
-        return '';
-    }
-
-    function onPlaceSelected(): void {}
+  getLocations({ _id }: Category) {
+    this.homeSvc.getLocationByCategoryId(_id).subscribe({
+      next: (data) => {
+        console.log(data)
+      },
+      error: (error) => {},
+    });
   }
 
   isAuthenticated!: boolean;

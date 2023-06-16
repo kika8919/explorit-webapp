@@ -9,20 +9,21 @@
     <mat-card-content>
       <mat-form-field appearance="fill">
         <mat-label>Places</mat-label>
-        <mat-select [(ngModel)]="selectedPlace">
-          <mat-option *ngFor="let place of places" [value]="place">
-            {{ place }}
+        <mat-select
+          [(ngModel)]="selectedCategory"
+          (ngModelChange)="getLocations(selectedCategory)"
+        >
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category.categoryName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <div *ngIf="selectedPlace">
-        <h3>{{ selectedPlace }}</h3>
-        <p>{{ getDescription(selectedPlace) }}</p>
+      <div *ngIf="selectedCategory">
+        <p>{{ selectedCategory.description }}</p>
       </div>
     </mat-card-content>
   </mat-card>
-
 </div>
 
 <!-- <div class="home-page">
