@@ -4,15 +4,20 @@
   <a routerLink="/"><span>Xplorit</span></a>
   <span class="example-spacer"></span>
   <div class="nav-right">
-    <a routerLink="/"> Home </a>
-    <a routerLink="/login" routerLinkActive="active"> Login </a>
-    <a
-      routerLink="/register"
-      routerLinkActive="active"
-      style="text-decoration: none"
-    >
-      Register
-    </a>
+    <div *appShowAuthed="false">
+      <a routerLink="/"> Home </a>
+      <a routerLink="/login" routerLinkActive="active"> Login </a>
+      <a
+        routerLink="/register"
+        routerLinkActive="active"
+        style="text-decoration: none"
+      >
+        Register
+      </a>
+    </div>
+    <div *appShowAuthed="true">
+      <a routerLink="/"> Home </a>
+    </div>
   </div>
   <div class="toolbar-space"></div>
 </mat-toolbar>
