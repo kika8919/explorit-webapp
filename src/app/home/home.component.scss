@@ -1,35 +1,45 @@
 .container {
-  max-width: 800px;
+  max-width: 100vw;
   margin: 0 auto;
   padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
-h1 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+.places {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.mat-card {
-  display: grid;
-  grid-template-columns: 1fr;
+mat-grid-tile {
+  background: lightblue;
+}
+
+.grid-card {
+  width: 100%;
+}
+
+.grid-tile {
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 10px;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  opacity: 0;
-  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.overlay-text {
+  color: white;
+  z-index: 2;
+  font-size: 2rem;
+  font-weight: 400;
 }
