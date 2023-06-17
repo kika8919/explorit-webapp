@@ -1,94 +1,33 @@
 <div class="container">
-  <h1>Welcome to our Tourism App!</h1>
+  <div class="places">
+    <div style="padding-bottom: 0.625rem">Select a Place to Explore</div>
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Select a Place to Explore</mat-card-title>
-    </mat-card-header>
+    <mat-form-field appearance="fill" style="width: 25rem">
+      <mat-label>Places</mat-label>
+      <mat-select
+        [(ngModel)]="selectedCategory"
+        (ngModelChange)="getLocations(selectedCategory)"
+      >
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category.categoryName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-card-content>
-      <mat-form-field appearance="fill">
-        <mat-label>Places</mat-label>
-        <mat-select
-          [(ngModel)]="selectedCategory"
-          (ngModelChange)="getLocations(selectedCategory)"
-        >
-          <mat-option *ngFor="let category of categories" [value]="category">
-            {{ category.categoryName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div *ngIf="selectedCategory">
-        <p>{{ selectedCategory.description }}</p>
-      </div>
-    </mat-card-content>
-  </mat-card>
+    <div *ngIf="selectedCategory">
+      <p>{{ selectedCategory.description }}</p>
+    </div>
+  </div>
+  <div class="grid-card" *ngIf="showCardGrid">
+    <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize=".9375rem">
+      <mat-grid-tile
+        *ngFor="let location of locations"
+        style="background-image: url('{{ location.images[0].url }}')"
+        class="grid-tile"
+      >
+        <div class="overlay"></div>
+        <div class="overlay-text">{{ location.area }}</div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>
-
-<!-- <div class="home-page">
-  <div class="banner" *appShowAuthed="false">
-    <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your <i>Angular</i> knowledge.</p>
-    </div>
-  </div>
-
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="feed-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [ngClass]="{ active: listConfig.type === 'feed' }"
-                (click)="setListTo('feed')"
-              >
-                Your Feed
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [ngClass]="{
-                  active: listConfig.type === 'all' && !listConfig.filters.tag
-                }"
-                (click)="setListTo('all')"
-              >
-                Global Feed
-              </a>
-            </li>
-            <li class="nav-item" [hidden]="!listConfig.filters.tag">
-              <a class="nav-link active">
-                <i class="ion-pound"></i> {{ listConfig.filters.tag }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="sidebar">
-          <p>Popular Tags</p>
-
-          <div class="tag-list">
-            <a
-              *ngFor="let tag of tags; trackBy: trackByFn"
-              (click)="setListTo('all', { tag: tag })"
-              class="tag-default tag-pill"
-            >
-              {{ tag }}
-            </a>
-          </div>
-
-          <div [hidden]="tagsLoaded">Loading tags...</div>
-
-          <div [hidden]="!tagsLoaded || tags.length > 0">
-            No tags are here... yet.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
