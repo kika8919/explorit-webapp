@@ -5,8 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { Category, HomeService, UserService } from '../core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Category, Errors, HomeService, UserService, Location } from '../core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -17,6 +17,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   selectedCategory!: Category;
   categories!: Category[];
+  errors!: Errors;
+  isAuthenticated!: boolean;
+  locations: Location[] = [];
+  showCardGrid: boolean = false;
 
   constructor(
     private homeSvc: HomeService,
@@ -38,53 +42,26 @@ export class HomeComponent implements OnInit {
           return { _id, categoryName, description };
         });
       },
-      error: (error) => {},
+      error: (error) => {
+        this.errors = { errors: error };
+      },
     });
   }
 
   getLocations({ _id }: Category) {
     this.homeSvc.getLocationByCategoryId(_id).subscribe({
       next: (data) => {
-        console.log(data)
+        this.loadLocations(data);
+        this.showCardGrid = true;
       },
-      error: (error) => {},
+      error: (error) => {
+        this.errors = { errors: error };
+      },
     });
   }
 
-  isAuthenticated!: boolean;
-  // listConfig: ArticleListConfig = {
-  //   type: 'all',
-  //   filters: {},
-  // };
-  // tags: Array<string> = [];
-  // tagsLoaded = false;
-
-  //   this.userService.isAuthenticated.subscribe((authenticated) => {
-  //     this.isAuthenticated = authenticated;
-
-  //     // set the article list accordingly
-  //     if (authenticated) {
-  //       this.setListTo('feed');
-  //     } else {
-  //       this.setListTo('all');
-  //     }
-  //     this.cd.markForCheck();
-  //   });
+  loadLocations(locations: Location[]) {
+    console.log(locations);
+    this.locations = locations;
+  }
 }
-
-// function onPlaceSelected() {
-//   throw new Error('Function not implemented.');
-// }
-// trackByFn(index: any, item: any) {
-//   return index;
-// }
-
-// setListTo(type: string = '', filters: Object = {}) {
-
-//   if (type === 'feed' && !this.isAuthenticated) {
-//     this.router.navigateByUrl('/login');
-//     return;
-//   }
-
-//   this.listConfig = { type: type, filters: filters };
-// }
