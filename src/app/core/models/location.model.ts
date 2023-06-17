@@ -1,3 +1,6 @@
+import { Activity } from './activity.model';
+import { Image } from './image.model';
+
 export interface Location {
   _id: string;
   area: string;
@@ -5,7 +8,7 @@ export interface Location {
   desciption: string;
   state: string;
   country: string;
-  images: string[];
+  images: Image[];
   lnglat: { lng: number; lat: number };
-  activities: any[];
+  activities: Activity[];
 }
