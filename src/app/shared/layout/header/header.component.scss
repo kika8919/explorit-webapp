@@ -4,16 +4,21 @@
 
 .nav-right {
   display: flex;
+  flex-direction: row;
   gap: 15px;
 }
+
 .toolbar {
   display: flex;
   background-color: rgb(186, 200, 242);
   justify-content: space-around;
+  top: 0px;
 }
+
 .toolbar-space {
   flex: 0.02;
 }
+
 a {
   text-decoration: none;
   color: black;
