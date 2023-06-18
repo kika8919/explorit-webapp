@@ -5,7 +5,7 @@ export interface Location {
   _id: string;
   area: string;
   city: string;
-  desciption: string;
+  description: string;
   state: string;
   country: string;
   images: Image[];

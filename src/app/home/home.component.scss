@@ -25,6 +25,7 @@ mat-grid-tile {
 .grid-tile {
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.2);
+ 
 }
 
 .overlay {
@@ -37,9 +38,23 @@ mat-grid-tile {
   z-index: 0;
 }
 
-.overlay-text {
+.overlay-text-area {
   color: white;
   z-index: 2;
   font-size: 2rem;
   font-weight: 400;
+}
+
+.overlay-text-area:hover {
+  cursor: pointer;
+}
+
+.overlay-text-desc {
+  color: #c2c2c2;
+  font-size: 1rem;
+  font-weight: 200;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }

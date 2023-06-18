@@ -26,7 +26,15 @@
         class="grid-tile"
       >
         <div class="overlay"></div>
-        <div class="overlay-text">{{ location.area }}</div>
+
+        <div class="overlay-text-area">
+          {{ location.area }}
+        </div>
+        <mat-grid-tile-footer>
+          <div class="overlay-text-desc">
+            {{ location.description }}
+          </div></mat-grid-tile-footer
+        >
       </mat-grid-tile>
     </mat-grid-list>
   </div>

@@ -18,4 +18,8 @@ export class HomeService {
       Location[]
     >;
   }
+
+  getLocationById(locationId: string): Observable<Location> {
+    return this.api.get(`/home/location/${locationId}`) as Observable<Location>;
+  }
 }
