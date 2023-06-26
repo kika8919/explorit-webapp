@@ -14,18 +14,31 @@
   align-items: center;
 }
 
+.home-card {
+  width: 97vw;
+  height: 50vh;
+  padding: 20px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/home_card_bg.jpg");
+  // background-position: center;
+}
+
 mat-grid-tile {
   background: lightblue;
 }
 
 .grid-card {
+  padding-top: 20px;
   width: 100%;
 }
 
 .grid-tile {
   background-size: cover;
   background-color: rgba(0, 0, 0, 0.2);
- 
+  border-radius: 25px;
 }
 
 .overlay {
@@ -56,5 +69,4 @@ mat-grid-tile {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
