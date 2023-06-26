@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { Category, Location } from '../models';
+import { Category, ILocation } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +13,15 @@ export class HomeService {
     return this.api.get('/home/category');
   }
 
-  getLocationByCategoryId(categoryId: string): Observable<Location[]> {
+  getLocationByCategoryId(categoryId: string): Observable<ILocation[]> {
     return this.api.get(`/home/category/${categoryId}`) as Observable<
-      Location[]
+      ILocation[]
     >;
   }
 
-  getLocationById(locationId: string): Observable<Location> {
-    return this.api.get(`/home/location/${locationId}`) as Observable<Location>;
+  getLocationById(locationId: string): Observable<ILocation> {
+    return this.api.get(
+      `/home/location/${locationId}`
+    ) as Observable<ILocation>;
   }
 }

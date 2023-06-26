@@ -27,7 +27,11 @@
       >
         <div class="overlay"></div>
 
-        <div class="overlay-text-area">
+        <div
+          class="overlay-text-area"
+          routerLink="{{ '/location/' + location._id }}"
+          routerLinkActive="active"
+        >
           {{ location.area }}
         </div>
         <mat-grid-tile-footer>

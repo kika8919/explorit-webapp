@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { Category, Errors, HomeService, UserService, Location } from '../core';
+import { Category, Errors, HomeService, UserService, ILocation } from '../core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   categories!: Category[];
   errors!: Errors;
   isAuthenticated!: boolean;
-  locations: Location[] = [];
+  locations: ILocation[] = [];
   showCardGrid: boolean = false;
 
   constructor(
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loadLocations(locations: Location[]) {
+  loadLocations(locations: ILocation[]) {
     console.log(locations);
     this.locations = locations;
   }

@@ -1,7 +1,7 @@
-import { Activity } from './activity.model';
+import { IActivity } from './activity.model';
 import { Image } from './image.model';
 
-export interface Location {
+export interface ILocation {
   _id: string;
   area: string;
   city: string;
@@ -10,5 +10,5 @@ export interface Location {
   country: string;
   images: Image[];
   lnglat: { lng: number; lat: number };
-  activities: Activity[];
+  activities: IActivity[];
 }
