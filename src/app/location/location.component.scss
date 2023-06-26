@@ -18,6 +18,7 @@
 
     .location-info {
       margin-top: 20px;
+     
 
       /* Styles for city, state, and Google Map location */
     }
@@ -66,7 +67,6 @@
     :host ::ng-deep .mat-row .mat-cell {
       border-bottom: 1px solid transparent;
       border-top: 1px solid transparent;
-      
     }
   }
 
@@ -74,7 +74,7 @@
     margin-top: 20px;
 
     .mat-tab-labels {
-      background-color: #f5f5f5;
+      background-color: #c11212;
     }
 
     .mat-tab-header {
@@ -82,7 +82,7 @@
     }
 
     .mat-tab-body-wrapper {
-      background-color: #fff;
+      background-color: #f0ecec;
       padding: 20px;
     }
   }
