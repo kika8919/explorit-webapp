@@ -18,17 +18,14 @@
 
     .location-info {
       margin-top: 20px;
-     
-
       /* Styles for city, state, and Google Map location */
     }
+
     .table-padding {
       padding-top: 30px;
       padding-bottom: 10px;
-
-      // padding-left: 10px;
-      // padding-right: 10px;
     }
+
     .mat-column-key {
       word-wrap: break-word !important;
       white-space: unset !important;
@@ -36,14 +33,13 @@
       width: 18% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-
       word-break: break-word;
-
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
       hyphens: auto;
     }
+
     .mat-column-value {
       word-wrap: break-word !important;
       white-space: unset !important;
@@ -51,39 +47,38 @@
       width: 78% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-
       word-break: break-word;
-
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
       hyphens: auto;
     }
-    ::ng-deep .mat-cell {
-      display: flex !important;
-      justify-content: flex-end !important;
-    }
 
-    :host ::ng-deep .mat-row .mat-cell {
+    .mat-mdc-row .mat-mdc-cell {
       border-bottom: 1px solid transparent;
       border-top: 1px solid transparent;
     }
-  }
 
-  .mat-tab-group {
-    margin-top: 20px;
-
-    .mat-tab-labels {
-      background-color: #c11212;
+    .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+      color: green;
+    }
+    .mat-mdc-tab.mdc-tab--active:hover .mdc-tab__text-label {
+      color: green;
+    }
+    .mat-mdc-tab:hover .mdc-tab__text-label {
+      color: green;
     }
 
-    .mat-tab-header {
-      border-bottom: 1px solid #ccc;
+    .mat-mdc-tab .mdc-tab__text-label {
+      color: green;
     }
 
-    .mat-tab-body-wrapper {
-      background-color: #f0ecec;
-      padding: 20px;
+    .mat-mdc-tab {
+      background-color: #fff;
+    }
+    .mat-mdc-tab.mdc-tab-indicator.mdc-tab-indicator__content
+      .mdc-tab-indicator__content--underline {
+      border-bottom: 2px solid green;
     }
   }
 }
