@@ -1,11 +1,17 @@
 <div class="container">
   <div class="places">
-    <mat-card class="home-card">
-      <mat-form-field appearance="fill" style="width: 40rem">
+    <mat-card
+      class="home-card"
+      [ngClass]="
+        showCardGrid ? 'home-card-half-height' : 'home-card-full-height'
+      "
+    >
+      <mat-form-field style="width: 40rem">
         <mat-label>Where To?</mat-label>
         <mat-select
           [(ngModel)]="selectedCategory"
           (ngModelChange)="getLocations(selectedCategory)"
+          panelClass="dropDown-overlay"
         >
           <mat-option *ngFor="let category of categories" [value]="category">
             {{ category.categoryName }}
@@ -13,8 +19,8 @@
         </mat-select>
       </mat-form-field>
 
-      <div *ngIf="selectedCategory">
-        <p>{{ selectedCategory.description }}</p>
+      <div *ngIf="selectedCategory" class="catergory-desc">
+        <p>&nbsp;&nbsp;{{ selectedCategory.description }}&nbsp;&nbsp;</p>
       </div>
     </mat-card>
   </div>
@@ -37,8 +43,15 @@
         <mat-grid-tile-footer>
           <div class="overlay-text-desc">
             {{ location.description }}
-          </div></mat-grid-tile-footer
-        >
+          </div>
+          <p
+            style="text-decoration: underline; cursor: pointer"
+            routerLink="{{ '/location/' + location._id }}"
+            routerLinkActive="active"
+          >
+            Read&nbsp;More
+          </p>
+        </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

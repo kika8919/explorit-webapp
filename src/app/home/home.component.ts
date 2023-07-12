@@ -1,18 +1,11 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Category, Errors, HomeService, UserService, ILocation } from '../core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   selectedCategory!: Category;
@@ -22,12 +15,7 @@ export class HomeComponent implements OnInit {
   locations: ILocation[] = [];
   showCardGrid: boolean = false;
 
-  constructor(
-    private homeSvc: HomeService,
-    private router: Router,
-    private userService: UserService,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private homeSvc: HomeService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.isAuthenticated.subscribe((authenticated) => {
@@ -61,7 +49,6 @@ export class HomeComponent implements OnInit {
   }
 
   loadLocations(locations: ILocation[]) {
-    console.log(locations);
     this.locations = locations;
   }
 }
