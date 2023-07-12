@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +12,7 @@ import { User, UserService } from '../core';
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
   user: User = {} as User;
@@ -27,7 +32,7 @@ export class SettingsComponent implements OnInit {
       username: '',
       bio: '',
       email: '',
-      password: ''
+      password: '',
     });
     // Optional: subscribe to changes on the form
     // this.settingsForm.valueChanges.subscribe(values => this.updateUser(values));
@@ -51,11 +56,10 @@ export class SettingsComponent implements OnInit {
     // update the model
     this.updateUser(this.settingsForm.value);
 
-    this.userService
-    .update(this.user)
-    .subscribe(
-      updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.username),
-      err => {
+    this.userService.update(this.user).subscribe(
+      (updatedUser) =>
+        this.router.navigateByUrl('/profile/' + updatedUser.email),
+      (err) => {
         this.errors = err;
         this.isSubmitting = false;
         this.cd.markForCheck();
@@ -66,5 +70,4 @@ export class SettingsComponent implements OnInit {
   updateUser(values: Object) {
     Object.assign(this.user, values);
   }
-
 }
