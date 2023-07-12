@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HomeService, ILocation } from '../core';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-location',
