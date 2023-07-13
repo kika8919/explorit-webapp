@@ -9,6 +9,21 @@ import { HomeService, ILocation } from '../core';
 })
 export class LocationComponent implements OnInit {
   displayedColumns: string[] = ['key', 'value'];
+  center!: google.maps.LatLngLiteral;
+  zoom = 18;
+  options: google.maps.MapOptions = {
+    disableDoubleClickZoom: true,
+    mapTypeId: 'hybrid',
+    maxZoom: 18,
+    minZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_BOTTOM,
+    },
+  };
   locationId: string;
   locationDetails!: ILocation;
   activityDatasource!: any;
@@ -34,7 +49,9 @@ export class LocationComponent implements OnInit {
       { key: 'State', value: this.locationDetails.state },
       { key: 'City', value: this.locationDetails.city },
     ];
+    this.center = this.locationDetails.lnglat;
   }
+
   activityTab() {
     this.activityDatasource = [
       {

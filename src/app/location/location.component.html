@@ -1,6 +1,8 @@
 <div class="location" *ngIf="locationDetails">
-  <div class="location-image">
-    <img width="90%" [src]="locationDetails.images[0].url" />
+  <div class="location-image-container">
+    <div *ngFor="let image of locationDetails.images">
+      <img class="location-image" [src]="image.url" />
+    </div>
   </div>
   <div class="location-details">
     <h2 class="location-title">{{ locationDetails.area }}</h2>
@@ -22,6 +24,16 @@
 
           <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
+        <div>
+          <google-map
+            height="200px"
+            width="30%"
+            [center]="center"
+            [zoom]="zoom"
+            [options]="options"
+          >
+          </google-map>
+        </div>
       </mat-tab>
       <mat-tab label="Activities" labelClass="overview-tab">
         <mat-table

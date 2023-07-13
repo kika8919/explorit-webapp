@@ -1,6 +1,6 @@
-$primary-color: #656868;
+$primary-color: #09c8c8;
 $secondary-color: #303030;
-$text-color: #fff;
+$text-color: #070404;
 
 .toolbar {
   background-color: $primary-color;
@@ -16,9 +16,11 @@ $text-color: #fff;
     font-size: 18px;
     font-weight: bold;
     margin-right: 20px;
+    font-family: cursive;
 
     &:hover {
       color: darken($text-color, 20%);
+      box-shadow: inset 100px 0 0 0 #d7fbfb;
     }
 
     &.active {

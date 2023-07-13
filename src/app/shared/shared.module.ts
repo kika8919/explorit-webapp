@@ -43,6 +43,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   imports: [
@@ -88,6 +89,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     CdkScrollableModule,
     MatBottomSheetModule,
     OverlayModule,
+    GoogleMapsModule,
   ],
   declarations: [ListErrorsComponent, ShowAuthedDirective],
   exports: [
@@ -135,6 +137,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     CdkScrollableModule,
     MatBottomSheetModule,
     OverlayModule,
+    GoogleMapsModule,
   ],
 })
 export class SharedModule {}

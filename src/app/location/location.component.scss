@@ -4,8 +4,18 @@
   align-items: flex-start;
   margin: 20px;
 
+  .location-image-container {
+    width: 95vw;
+    display: flex;
+    overflow: auto;
+    scroll-snap-type:x mandatory;
+  }
+
   .location-image {
-    width: 50vw;
+    height: 40vh;
+    padding: 0px 2px 0px 2px;
+    flex-shrink: 1.5;
+    scroll-snap-align: start;
   }
 
   .location-details {
