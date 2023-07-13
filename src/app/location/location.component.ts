@@ -13,10 +13,10 @@ export class LocationComponent implements OnInit {
   zoom = 18;
   options: google.maps.MapOptions = {
     disableDoubleClickZoom: true,
-    mapTypeId: 'hybrid',
+    mapTypeId: 'roadmap',
     maxZoom: 18,
-    minZoom: 15,
-    zoomControl: true,
+    minZoom: 11,
+    zoomControl: false,
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: false,
