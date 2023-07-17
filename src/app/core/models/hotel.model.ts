@@ -16,4 +16,6 @@ export interface IHotel {
   amenities: string[];
   customerRatings: number;
   locationId: string;
+  showTabs?: boolean;
+  activeTab?: number;
 }

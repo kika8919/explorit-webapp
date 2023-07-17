@@ -1,34 +1,97 @@
 <div *ngFor="let hotel of hotels" class="hotel-list">
-  <mat-card class="hotel">
-
-    <div style="width: 45%">
-      <img [src]="hotel.images[0].url" style="width: 370px; border-radius: 1.25rem;" />
+  <mat-card class="mat-hotel-card">
+    <div class="hotel">
+      <div style="width: 45%">
+        <img
+          [src]="hotel.images[0].url"
+          style="width: 370px; border-radius: 1.25rem"
+        />
+      </div>
+      <div style="width: 35%; padding: 0.5rem" class="hotel-info">
+        <h3 style="font-weight: bold">{{ hotel.name }}</h3>
+        <div>
+          <span class="star" [ngClass]="{ filled: hotel.starRating >= 1 }"
+            >&#9733;</span
+          >
+          <span
+            class="star"
+            [ngClass]="{
+              filled:
+                hotel.starRating >= 2 ||
+                (hotel.starRating >= 1.5 && hotel.starRating < 2)
+            }"
+            >&#9733;</span
+          >
+          <span
+            class="star"
+            [ngClass]="{
+              filled:
+                hotel.starRating >= 3 ||
+                (hotel.starRating >= 2.5 && hotel.starRating < 3)
+            }"
+            >&#9733;</span
+          >
+          <span
+            class="star"
+            [ngClass]="{
+              filled:
+                hotel.starRating >= 4 ||
+                (hotel.starRating >= 3.5 && hotel.starRating < 4)
+            }"
+            >&#9733;</span
+          >
+          <span
+            class="star"
+            [ngClass]="{
+              filled:
+                hotel.starRating >= 5 ||
+                (hotel.starRating >= 4.5 && hotel.starRating < 5)
+            }"
+            >&#9733;</span
+          >
+        </div>
+        <div class="show-description" (click)="showDescription(hotel)">
+          <p>
+            <strong>{{ hotel.distanceFromCity }}</strong> from city center
+          </p>
+          <p>
+            <mat-icon class="material-symbols-outlined"> expand_more </mat-icon>
+          </p>
+        </div>
+        <div class="show-photos" (click)="showPhotos(hotel)">
+          <p>{{ hotel.images.length }} Photos</p>
+          <p>
+            <mat-icon class="material-symbols-outlined"> expand_more </mat-icon>
+          </p>
+        </div>
+      </div>
+      <div style="width: 20%; padding: 0.5rem" class="hotel-booking">
+        <p><strong>Price:</strong> {{ hotel.price }}</p>
+      </div>
     </div>
-    <div style="width: 35%" class="hotel-info">
-      <h3>{{ hotel.name }}</h3>
-      <p>
-        <strong>{{ hotel.distanceFromCity }}</strong> from city center
-      </p>
-       <mat-tab-group>
-        <mat-tab label="Description">
-          <div class="description">
-            <h4>Description</h4>
-            <p>{{ hotel.description }}</p>
+    <div *ngIf="hotel.showTabs">
+      <mat-tab-group
+        #tabGroup
+        mat-stretch-tabs="false"
+        mat-align-tabs="center"
+        [selectedIndex]="hotel.activeTab"
+      >
+        <mat-tab label="Description" labelClass="overview-tab">
+          <div class="overview-tab-content">
+            <h4 style="font-weight: bold">About The Westin Goa</h4>
+            <div>{{ hotel.description }}</div>
+            <h4 style="font-weight: bold; padding-top: .625rem;">Top Amenities</h4>
+            <mat-grid-list cols="3" rowHeight="7:1">
+              <mat-grid-tile
+                *ngFor="let amenity of hotel.amenities"
+                class="amenity"
+                ><li>{{ amenity }}</li></mat-grid-tile
+              >
+            </mat-grid-list>
           </div>
         </mat-tab>
-        <mat-tab label="Photos">
-          <div class="photos">
-            <h4>Photos</h4>
-            <div *ngFor="let photo of hotel.images" class="photo">
-              <img [src]="photo.url" alt="Hotel Photo" />
-            </div>
-          </div>
-        </mat-tab>
+        <mat-tab label="Photos" labelClass="overview-tab"> </mat-tab>
       </mat-tab-group>
-    </div>
-    
-    <div style="width: 20%" class="hotel-booking">
-      <p><strong>Price:</strong> {{ hotel.price }}</p>
     </div>
   </mat-card>
 </div>

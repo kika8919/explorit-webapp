@@ -10,23 +10,26 @@ export class HotelListsComponent implements OnInit {
   @Input()
   locationId!: string;
 
-  hotels!: IHotel[];
+  hotels: IHotel[] = [];
 
   constructor(private homeSvc: HomeService) {}
   ngOnInit(): void {
     this.homeSvc.getHotelsByLocationId(this.locationId).subscribe({
       next: (data) => {
-        this.hotels = data;
+        for (let hotel of data) {
+          hotel.showTabs = false;
+          this.hotels.push(hotel);
+        }
       },
       error: (error) => {},
     });
   }
-
-  toggleDescription(hotel: IHotel) {
-    hotel.description = hotel.description;
+  showDescription(hotel: IHotel) {
+    hotel.showTabs = !hotel.showTabs;
+    hotel.activeTab = 0;
   }
-
-  togglePhotos(hotel: IHotel) {
-    hotel.images = hotel.images;
+  showPhotos(hotel: IHotel) {
+    hotel.showTabs = !hotel.showTabs;
+    hotel.activeTab = 1;
   }
 }
