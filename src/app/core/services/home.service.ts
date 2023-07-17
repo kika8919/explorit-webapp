@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { Category, ILocation } from '../models';
+import { Category, ILocation, IHotel } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +23,9 @@ export class HomeService {
     return this.api.get(
       `/home/location/${locationId}`
     ) as Observable<ILocation>;
+  }
+
+  getHotelsByLocationId(locationId: string): Observable<IHotel[]> {
+    return this.api.get(`/home/hotels/${locationId}`) as Observable<IHotel[]>;
   }
 }

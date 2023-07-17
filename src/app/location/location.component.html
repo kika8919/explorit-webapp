@@ -6,7 +6,7 @@
   </div>
   <div class="location-details">
     <h2 class="location-title">{{ locationDetails.area }}</h2>
-    <mat-tab-group style="width: 50vw">
+    <mat-tab-group style="width: 95vw">
       <mat-tab label="Overview" labelClass="overview-tab">
         <mat-table
           [dataSource]="overviewDatasource"
@@ -52,6 +52,9 @@
 
           <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
+      </mat-tab>
+      <mat-tab label="Hotels" labelClass="overview-tab">
+        <app-hotel-lists [locationId]="locationId"></app-hotel-lists>
       </mat-tab>
 
       <!-- Add more tabs as needed -->

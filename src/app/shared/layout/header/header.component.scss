@@ -20,7 +20,9 @@ $text-color: #070404;
 
     &:hover {
       color: darken($text-color, 20%);
-      box-shadow: inset 100px 0 0 0 #d7fbfb;
+      box-shadow: inset 120px 0 0 0 #d7fbfb;
+      border-radius: 20px;
+      padding: 6px;
     }
 
     &.active {
