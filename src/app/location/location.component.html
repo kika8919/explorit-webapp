@@ -6,7 +6,11 @@
   </div>
   <div class="location-details">
     <h2 class="location-title">{{ locationDetails.area }}</h2>
-    <mat-tab-group style="width: 95vw">
+    <mat-tab-group
+      style="width: 95vw"
+      mat-stretch-tabs="true"
+      mat-align-tabs="center"
+    >
       <mat-tab label="Overview" labelClass="overview-tab">
         <mat-table
           [dataSource]="overviewDatasource"

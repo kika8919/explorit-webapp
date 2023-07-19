@@ -1,19 +1,28 @@
 <div *ngFor="let hotel of hotels" class="hotel-list">
   <mat-card class="mat-hotel-card">
     <div class="hotel">
-      <div style="width: 45%">
+      <div style="width: 40%">
         <img
           [src]="hotel.images[0].url"
-          style="width: 370px; border-radius: 1.25rem"
+          style="width: 370px; border-radius: 1.25rem; height: 250px"
         />
       </div>
-      <div style="width: 35%; padding: 0.5rem" class="hotel-info">
-        <h3 style="font-weight: bold">{{ hotel.name }}</h3>
-        <div>
-          <span class="star" [ngClass]="{ filled: hotel.starRating >= 1 }"
+      <div class="hotel-info">
+        <h3 style="font-weight: bold; margin-bottom: 0px !important">
+          {{ hotel.name }}
+        </h3>
+        <div style="padding-bottom: 20px">
+          <span
+            class="star"
+            *ngIf="hotel.starRating >= 1"
+            [ngClass]="{ filled: hotel.starRating >= 1 }"
             >&#9733;</span
           >
           <span
+            *ngIf="
+              hotel.starRating >= 2 ||
+              (hotel.starRating >= 1.5 && hotel.starRating < 2)
+            "
             class="star"
             [ngClass]="{
               filled:
@@ -23,6 +32,10 @@
             >&#9733;</span
           >
           <span
+            *ngIf="
+              hotel.starRating >= 3 ||
+              (hotel.starRating >= 2.5 && hotel.starRating < 2)
+            "
             class="star"
             [ngClass]="{
               filled:
@@ -32,6 +45,10 @@
             >&#9733;</span
           >
           <span
+            *ngIf="
+              hotel.starRating >= 3 ||
+              (hotel.starRating >= 3.5 && hotel.starRating < 4)
+            "
             class="star"
             [ngClass]="{
               filled:
@@ -41,14 +58,19 @@
             >&#9733;</span
           >
           <span
+            *ngIf="
+              hotel.starRating >= 5 ||
+              (hotel.starRating >= 4.5 && hotel.starRating < 5)
+            "
             class="star"
             [ngClass]="{
               filled:
                 hotel.starRating >= 5 ||
                 (hotel.starRating >= 4.5 && hotel.starRating < 5)
             }"
-            >&#9733;</span
-          >
+            >&#9733;
+          </span>
+          Hotel
         </div>
         <div class="show-description" (click)="showDescription(hotel)">
           <p>
@@ -59,13 +81,13 @@
           </p>
         </div>
         <div class="show-photos" (click)="showPhotos(hotel)">
-          <p>{{ hotel.images.length }} Photos</p>
+          <p>{{ hotel.images.length }} Photos for this property</p>
           <p>
             <mat-icon class="material-symbols-outlined"> expand_more </mat-icon>
           </p>
         </div>
       </div>
-      <div style="width: 20%; padding: 0.5rem" class="hotel-booking">
+      <div class="hotel-booking">
         <p><strong>Price:</strong> {{ hotel.price }}</p>
       </div>
     </div>
@@ -78,19 +100,36 @@
       >
         <mat-tab label="Description" labelClass="overview-tab">
           <div class="overview-tab-content">
-            <h4 style="font-weight: bold">About The Westin Goa</h4>
+            <h4 style="font-weight: bold">About {{ hotel.name }}</h4>
             <div>{{ hotel.description }}</div>
-            <h4 style="font-weight: bold; padding-top: .625rem;">Top Amenities</h4>
-            <mat-grid-list cols="3" rowHeight="7:1">
-              <mat-grid-tile
-                *ngFor="let amenity of hotel.amenities"
-                class="amenity"
-                ><li>{{ amenity }}</li></mat-grid-tile
-              >
+            <h4 style="font-weight: bold; padding-top: 1rem">Top Amenities</h4>
+            <mat-grid-list cols="4" rowHeight="8:1">
+              <mat-grid-tile *ngFor="let amenity of hotel.amenities">
+                <p>
+                  <span style="font-weight: 800">&nbsp;&#8226;&nbsp;</span>
+                  {{ amenity }}
+                </p>
+              </mat-grid-tile>
             </mat-grid-list>
           </div>
         </mat-tab>
-        <mat-tab label="Photos" labelClass="overview-tab"> </mat-tab>
+        <mat-tab label="Photos" labelClass="overview-tab">
+          <div class="photos">
+            <mat-grid-list cols="3" rowHeight="3:2" gutterSize="10px">
+              <mat-grid-tile *ngFor="let photo of hotel.images">
+                <img
+                  style="
+                    width: 21vw;
+                    height: 28vh;
+                    border-radius: 25px;
+                    padding-top: 0.125rem;
+                  "
+                  [src]="photo.url"
+                  alt="Hotel Photo"
+                /> </mat-grid-tile
+            ></mat-grid-list>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </mat-card>

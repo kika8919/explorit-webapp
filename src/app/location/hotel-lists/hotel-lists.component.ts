@@ -16,6 +16,7 @@ export class HotelListsComponent implements OnInit {
   ngOnInit(): void {
     this.homeSvc.getHotelsByLocationId(this.locationId).subscribe({
       next: (data) => {
+        console.log(data);
         for (let hotel of data) {
           hotel.showTabs = false;
           this.hotels.push(hotel);
@@ -24,12 +25,14 @@ export class HotelListsComponent implements OnInit {
       error: (error) => {},
     });
   }
+
   showDescription(hotel: IHotel) {
-    hotel.showTabs = !hotel.showTabs;
+    hotel.activeTab != 1 && (hotel.showTabs = !hotel.showTabs);
     hotel.activeTab = 0;
   }
+
   showPhotos(hotel: IHotel) {
-    hotel.showTabs = !hotel.showTabs;
+    hotel.activeTab != 0 && (hotel.showTabs = !hotel.showTabs);
     hotel.activeTab = 1;
   }
 }
