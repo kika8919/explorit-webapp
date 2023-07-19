@@ -110,3 +110,6 @@ mat-grid-tile {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+::ng-deep .mat-grid-tile-content {
+  justify-content: center !important;
+}
