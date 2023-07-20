@@ -52,10 +52,9 @@
 
 .overview-tab-content {
   padding: 1.25rem;
-}
-
-::ng-deep .mat-grid-tile-content {
-  justify-content: flex-start !important;
+  ::ng-deep .mat-grid-tile-content {
+    justify-content: flex-start !important;
+  }
 }
 
 .hotel-booking {
@@ -68,6 +67,6 @@
   padding: 1rem;
 }
 
-.photos{
+.photos {
   padding: 20px;
 }

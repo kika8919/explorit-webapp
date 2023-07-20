@@ -19,54 +19,34 @@
             >&#9733;</span
           >
           <span
-            *ngIf="
-              hotel.starRating >= 2 ||
-              (hotel.starRating >= 1.5 && hotel.starRating < 2)
-            "
+            *ngIf="hotel.starRating >= 1.5"
             class="star"
             [ngClass]="{
-              filled:
-                hotel.starRating >= 2 ||
-                (hotel.starRating >= 1.5 && hotel.starRating < 2)
+              filled: hotel.starRating >= 1.5
             }"
             >&#9733;</span
           >
           <span
-            *ngIf="
-              hotel.starRating >= 3 ||
-              (hotel.starRating >= 2.5 && hotel.starRating < 2)
-            "
+            *ngIf="hotel.starRating >= 2.5"
             class="star"
             [ngClass]="{
-              filled:
-                hotel.starRating >= 3 ||
-                (hotel.starRating >= 2.5 && hotel.starRating < 3)
+              filled: hotel.starRating >= 2.5
             }"
             >&#9733;</span
           >
           <span
-            *ngIf="
-              hotel.starRating >= 3 ||
-              (hotel.starRating >= 3.5 && hotel.starRating < 4)
-            "
+            *ngIf="hotel.starRating >= 3.5"
             class="star"
             [ngClass]="{
-              filled:
-                hotel.starRating >= 4 ||
-                (hotel.starRating >= 3.5 && hotel.starRating < 4)
+              filled: hotel.starRating >= 3.5
             }"
             >&#9733;</span
           >
           <span
-            *ngIf="
-              hotel.starRating >= 5 ||
-              (hotel.starRating >= 4.5 && hotel.starRating < 5)
-            "
+            *ngIf="hotel.starRating >= 4.5"
             class="star"
             [ngClass]="{
-              filled:
-                hotel.starRating >= 5 ||
-                (hotel.starRating >= 4.5 && hotel.starRating < 5)
+              filled: hotel.starRating >= 4.5
             }"
             >&#9733;
           </span>
