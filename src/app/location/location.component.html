@@ -12,26 +12,35 @@
       mat-align-tabs="center"
     >
       <mat-tab label="Overview" labelClass="overview-tab">
-        <mat-table
-          [dataSource]="overviewDatasource"
-          class="mat-elevation-z0 table-padding"
-        >
-          <ng-container matColumnDef="key">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.key }} </mat-cell>
-          </ng-container>
+        <div class="overview">
+          <div class="overview-info">
+            <mat-table
+              [dataSource]="overviewDatasource"
+              class="mat-elevation-z0 table-padding"
+            >
+              <ng-container matColumnDef="key">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element.key }}
+                </mat-cell>
+              </ng-container>
 
-          <ng-container matColumnDef="value">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.value }} </mat-cell>
-          </ng-container>
+              <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element"
+                  >{{ element.value }}
+                </mat-cell>
+              </ng-container>
 
-          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </mat-table>
-        <div>
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+          </div>
           <google-map
-            height="200px"
-            width="30%"
+            width="30vw"
+            height="15rem"
+            class="google-map-view"
             [center]="center"
             [zoom]="zoom"
             [options]="options"

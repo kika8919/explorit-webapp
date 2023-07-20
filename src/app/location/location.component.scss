@@ -8,7 +8,7 @@
     width: 95vw;
     display: flex;
     overflow: auto;
-    scroll-snap-type:x mandatory;
+    scroll-snap-type: x mandatory;
   }
 
   .location-image {
@@ -89,6 +89,17 @@
     .mat-mdc-tab.mdc-tab-indicator.mdc-tab-indicator__content
       .mdc-tab-indicator__content--underline {
       border-bottom: 2px solid green;
+    }
+
+    .overview {
+      display: flex;
+      flex-direction: row;
+      row-gap: 10px;
+      justify-content: space-between;
+
+      .overview-info {
+        width: 62vw;
+      }
     }
   }
 }
