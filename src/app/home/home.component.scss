@@ -73,6 +73,9 @@ mat-grid-tile {
 .grid-card {
   padding-top: 20px;
   width: 99.5%;
+  ::ng-deep .mat-grid-tile-content {
+    justify-content: center !important;
+  }
 }
 
 .grid-tile {
@@ -109,7 +112,4 @@ mat-grid-tile {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-::ng-deep .mat-grid-tile-content {
-  justify-content: center !important;
 }
