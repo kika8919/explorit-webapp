@@ -1,1 +1,17 @@
-
+.footer {
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: end;
+  flex-direction: column;
+  background-color: rgb(13, 82, 99) !important;
+  //   color: hsla(0, 0%, 100%, 0.85);
+}
+.pmd-site-info {
+  color: rgb(255, 255, 255) !important;
+  font-size: 14px;
+  margin: 0;
+  text-align: center !important;
+  box-sizing: border-box;
+  padding-right: 20px;
+}

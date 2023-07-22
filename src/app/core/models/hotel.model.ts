@@ -4,9 +4,9 @@ export interface IHotel {
   _id: string;
   distanceFromCity: string;
   name: string;
-  checkIn: string;
+  checkIn: number;
   description: string;
-  checkOut: string;
+  checkOut: number;
   contact: string;
   images: Image[];
   lnglat: { lng: number; lat: number };

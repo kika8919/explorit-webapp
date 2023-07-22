@@ -68,7 +68,28 @@
         </div>
       </div>
       <div class="hotel-booking">
-        <p><strong>Price:</strong> {{ hotel.price }}</p>
+        <div class="time-price">
+          <p>
+            <strong>Check-in:</strong>
+            {{
+              hotel.checkIn >= 12
+                ? 24 - hotel.checkIn + ":00 PM"
+                : hotel.checkIn + ":00 AM"
+            }}
+          </p>
+          <p>
+            <strong>Check-out:</strong>
+            {{
+              hotel.checkOut >= 12
+                ? 24 - hotel.checkOut + ":00 PM"
+                : hotel.checkOut + ":00 AM"
+            }}
+          </p>
+          <p><strong>Price:</strong> &#8377; {{ hotel.price }}</p>
+        </div>
+        <button mat-flat-button style="font-weight: bold; color: blue;" (click)="book()">
+          BOOK NOW
+        </button>
       </div>
     </div>
     <div *ngIf="hotel.showTabs">

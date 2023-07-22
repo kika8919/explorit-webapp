@@ -60,6 +60,15 @@
 .hotel-booking {
   width: 30%;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  .time-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 .hotel-info {
