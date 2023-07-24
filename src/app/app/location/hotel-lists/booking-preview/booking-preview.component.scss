@@ -1,0 +1,45 @@
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mdc-dialog__title::before {
+  height: 1.25rem !important;
+  display: flex;
+}
+
+.mat-stepper-vertical {
+  margin-top: 0.5rem;
+}
+
+.mat-mdc-form-field {
+  margin-top: 1rem;
+}
+
+.stepper-content {
+  background: #f0f0f0;
+  padding: 1em 2em 1em 2em;
+  margin-top: 0.5em;
+  border-radius: 1em;
+}
+
+.thirdFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  &-field {
+    width: 25%;
+  }
+}
+
+.booking-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mat-caption {
+  font-weight: 400;
+  font-size: 0.6875rem;
+  color: #7d7d7d;
+}

@@ -1,0 +1,89 @@
+.hotel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.625rem;
+  background-color: #fffcfc;
+}
+
+.hotel {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.mat-hotel-card {
+  width: 80%;
+  border-radius: 1.25rem;
+}
+
+.star {
+  color: gold;
+  font-size: 1rem;
+}
+
+.filled {
+  color: gold;
+}
+
+.show-description {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.show-photos {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.description {
+  padding: 0.625rem;
+}
+
+.overview-tab {
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.overview-tab-content {
+  padding: 1.25rem;
+  ::ng-deep .mat-grid-tile-content {
+    justify-content: flex-start !important;
+  }
+}
+
+.hotel-booking {
+  width: 30%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  .time-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.hotel-info {
+  width: 30%;
+  padding: 1rem;
+}
+
+.photos {
+  padding: 20px;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+  max-height: 58vh;
+}
+
+.booking-preview {
+  z-index: 9;
+}

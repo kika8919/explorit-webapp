@@ -1,0 +1,83 @@
+<div class="location" *ngIf="locationDetails">
+  <div class="location-image-container">
+    <div *ngFor="let image of locationDetails.images">
+      <img class="location-image" [src]="image.url" />
+    </div>
+  </div>
+  <div class="location-details">
+    <h2 class="location-title">{{ locationDetails.area }}</h2>
+    <mat-tab-group
+      style="width: 95vw"
+      mat-stretch-tabs="true"
+      mat-align-tabs="center"
+    >
+      <mat-tab label="Overview" labelClass="overview-tab">
+        <div class="overview">
+          <div class="overview-info">
+            <mat-table
+              [dataSource]="overviewDatasource"
+              class="mat-elevation-z0 table-padding"
+            >
+              <ng-container matColumnDef="key">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element.key }}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element"
+                  >{{ element.value }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+          </div>
+          <google-map
+            style="padding-top: 30px"
+            width="30vw"
+            height="15rem"
+            class="google-map-view"
+            [center]="center"
+            [zoom]="zoom"
+            [options]="options"
+          >
+          </google-map>
+        </div>
+      </mat-tab>
+      <mat-tab label="Activities" labelClass="overview-tab">
+        <mat-table
+          style="background-color: #fffcfc"
+          [dataSource]="activityDatasource"
+          class="mat-elevation-z0 table-padding"
+        >
+          <ng-container matColumnDef="key">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.key }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.value }} </mat-cell>
+          </ng-container>
+
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </mat-tab>
+      <mat-tab label="Hotels" labelClass="overview-tab">
+        <div class="hotel-tab">
+          <app-hotel-lists [locationId]="locationId"></app-hotel-lists>
+        </div>
+      </mat-tab>
+
+      <!-- Add more tabs as needed -->
+    </mat-tab-group>
+    <div class="location-info">
+      <!-- City, state, and Google Map location -->
+    </div>
+  </div>
+</div>
