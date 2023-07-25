@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationModule } from './location/location.module';
+import { BookingsModule } from './bookings/bookings.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -21,6 +22,7 @@ import { LocationModule } from './location/location.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     LocationModule,
+    BookingsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
