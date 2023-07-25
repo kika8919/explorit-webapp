@@ -65,8 +65,8 @@ export class BookingPreviewComponent implements OnInit {
 
   confirmBooking() {
     const stayDates = {
-      end: this.durationOfStay.controls.end.value?.toISOString(),
-      start: this.durationOfStay.controls.start.value?.toISOString(),
+      end: this.durationOfStay.controls.end.value?.toISOString()!,
+      start: this.durationOfStay.controls.start.value?.toISOString()!,
     };
     const bookingInfo: IBooking = {
       hotel: this.data.hotel._id,

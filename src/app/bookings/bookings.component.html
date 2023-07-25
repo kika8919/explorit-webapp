@@ -1,1 +1,210 @@
-<p>bookings works!</p>
+<div class="container">
+  <mat-tab-group
+    mat-stretch-tabs="true"
+    mat-align-tabs="start"
+    style="width: 98vw"
+  >
+    <mat-tab label="Upcoming Bookings">
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item
+          *ngFor="let item of upcomingBookings; let index = index"
+          #accordionItem="cdkAccordionItem"
+          class="item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index"
+        >
+          <div class="item-header" (click)="accordionItem.toggle()">
+            <span>{{ item.populatedHotel?.name }}</span>
+            <span
+              >{{ item.dates.start | date : "longDate" }} -
+              {{ item.dates.end | date : "longDate" }}</span
+            >
+            <span class="item-description">
+              {{ accordionItem.expanded ? "Close" : "View More Details" }}
+            </span>
+          </div>
+          <div
+            class="item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index"
+          >
+            <div class="stepper-content booking-preview">
+              <div style="display: flex; flex-direction: column">
+                <span class="mat-caption">
+                  {{ "Hotel:" }}
+                </span>
+                <span class="mat-body1">
+                  {{ item.populatedHotel?.name }}
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">
+                    {{ "CheckIn: " }}
+                  </span>
+                  <span class="mat-body1">
+                    {{ item.dates.start | date : "longDate" }}
+                  </span>
+                </div>
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">
+                    {{ "CheckOut: " }}
+                  </span>
+                  <span class="mat-body1">
+                    {{ item.dates.end | date : "longDate" }}
+                  </span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column">
+                <span class="mat-caption">{{ "No of Guests:" }}</span>
+                <span class="mat-body1">
+                  {{ item.noOfPeople }}
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">{{ "Contact Details:" }}</span>
+                  <span class="mat-body1">
+                    {{ item.contactPhoneNumber }}
+                  </span>
+                </div>
+                <div
+                  *ngIf="item.contactEmail"
+                  style="display: flex; flex-direction: column"
+                >
+                  <span class="mat-caption">{{ "Email:" }}</span>
+                  <span class="mat-body1">{{ item.contactEmail }}</span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption"
+                    >{{ "Total Cost" }} &nbsp;<mat-icon
+                      style="
+                        font-weight: 400;
+                        font-size: 0.6875rem;
+                        margin-bottom: -0.875rem;
+                      "
+                      matTooltipPosition="right"
+                      matTooltip="Hotel Price/per night X Rooms X Booking Duration"
+                      >info</mat-icon
+                    ></span
+                  >
+                  <span class="mat-body1">
+                    &#8377;&nbsp;{{ item.totalCost }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </mat-tab>
+    <mat-tab label="Past Bookings">
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item
+          *ngFor="let item of pastBookings; let index = index"
+          #accordionItem="cdkAccordionItem"
+          class="item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index"
+        >
+          <div class="item-header" (click)="accordionItem.toggle()">
+            <span>{{ item.populatedHotel?.name }}</span>
+            <span
+              >{{ item.dates.start | date : "longDate" }} -
+              {{ item.dates.end | date : "longDate" }}</span
+            >
+            <span class="item-description">
+              {{ accordionItem.expanded ? "Close" : "View More Details" }}
+            </span>
+          </div>
+          <div
+            class="item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index"
+          >
+            <div class="stepper-content booking-preview">
+              <div style="display: flex; flex-direction: column">
+                <span class="mat-caption">
+                  {{ "Hotel:" }}
+                </span>
+                <span class="mat-body1">
+                  {{ item.populatedHotel?.name }}
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">
+                    {{ "CheckIn: " }}
+                  </span>
+                  <span class="mat-body1">
+                    {{ item.dates.start | date : "longDate" }}
+                  </span>
+                </div>
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">
+                    {{ "CheckOut: " }}
+                  </span>
+                  <span class="mat-body1">
+                    {{ item.dates.end | date : "longDate" }}
+                  </span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column">
+                <span class="mat-caption">{{ "No of Guests:" }}</span>
+                <span class="mat-body1">
+                  {{ item.noOfPeople }}
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption">{{ "Contact Details:" }}</span>
+                  <span class="mat-body1">
+                    {{ item.contactPhoneNumber }}
+                  </span>
+                </div>
+                <div
+                  *ngIf="item.contactEmail"
+                  style="display: flex; flex-direction: column"
+                >
+                  <span class="mat-caption">{{ "Email:" }}</span>
+                  <span class="mat-body1">{{ item.contactEmail }}</span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: row; gap: 3.125rem">
+                <div style="display: flex; flex-direction: column">
+                  <span class="mat-caption"
+                    >{{ "Total Cost" }} &nbsp;<mat-icon
+                      style="
+                        font-weight: 400;
+                        font-size: 0.6875rem;
+                        margin-bottom: -0.875rem;
+                      "
+                      matTooltipPosition="right"
+                      matTooltip="Hotel Price/per night X Rooms X Booking Duration"
+                      >info</mat-icon
+                    ></span
+                  >
+                  <span class="mat-body1">
+                    &#8377;&nbsp;{{ item.totalCost }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </mat-tab>
+  </mat-tab-group>
+</div>

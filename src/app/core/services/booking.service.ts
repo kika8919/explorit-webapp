@@ -13,7 +13,7 @@ export class BookingService {
     return this.api.post('/booking', { booking: bookingInfo });
   }
 
-  getAllBookingsByUserId(userId: string): Observable<IBooking[]> {
-    return this.api.get(`/booking/${userId}`);
+  getAllBookingsByEmail(email: string): Observable<IBooking[]> {
+    return this.api.get(`/booking/${email}`);
   }
 }
