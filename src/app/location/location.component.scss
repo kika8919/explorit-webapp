@@ -2,13 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-top: 4.375rem;
   margin: 20px;
+  background-color: #fffcfc;
 
   .location-image-container {
     width: 95vw;
     display: flex;
     overflow: auto;
     scroll-snap-type: x mandatory;
+    background-color: #fffcfc;
   }
 
   .location-image {
@@ -20,6 +23,7 @@
 
   .location-details {
     margin-top: 20px;
+    // background-color: #fffcfc;
 
     .location-title {
       font-size: 24px;
@@ -34,6 +38,7 @@
     .table-padding {
       padding-top: 30px;
       padding-bottom: 10px;
+      background-color: #fffcfc;
     }
 
     .mat-column-key {
@@ -48,6 +53,7 @@
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
       hyphens: auto;
+      background-color: #fffcfc;
     }
 
     .mat-column-value {
@@ -62,6 +68,7 @@
       -moz-hyphens: auto;
       -webkit-hyphens: auto;
       hyphens: auto;
+      background-color: #fffcfc;
     }
 
     .mat-mdc-row .mat-mdc-cell {
@@ -98,8 +105,14 @@
       justify-content: space-between;
 
       .overview-info {
+        background-color: #fffcfc;
         width: 62vw;
       }
+    }
+
+    .hotel-tab {
+      padding: 1.5625rem;
+      background-color: #fffcfc;
     }
   }
 }

@@ -79,3 +79,11 @@
 .photos {
   padding: 20px;
 }
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+  max-height: 58vh;
+}
+
+.booking-preview {
+  z-index: 9;
+}

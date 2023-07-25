@@ -51,6 +51,7 @@
       </mat-tab>
       <mat-tab label="Activities" labelClass="overview-tab">
         <mat-table
+          style="background-color: #fffcfc"
           [dataSource]="activityDatasource"
           class="mat-elevation-z0 table-padding"
         >
@@ -68,7 +69,9 @@
         </mat-table>
       </mat-tab>
       <mat-tab label="Hotels" labelClass="overview-tab">
-        <app-hotel-lists [locationId]="locationId"></app-hotel-lists>
+        <div class="hotel-tab">
+          <app-hotel-lists [locationId]="locationId"></app-hotel-lists>
+        </div>
       </mat-tab>
 
       <!-- Add more tabs as needed -->

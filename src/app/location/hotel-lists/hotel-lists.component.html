@@ -87,7 +87,11 @@
           </p>
           <p><strong>Price:</strong> &#8377; {{ hotel.price }}</p>
         </div>
-        <button mat-flat-button style="font-weight: bold; color: blue;" (click)="book()">
+        <button
+          mat-flat-button
+          style="font-weight: bold; color: blue"
+          (click)="book(hotel)"
+        >
           BOOK NOW
         </button>
       </div>

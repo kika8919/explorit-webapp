@@ -1,7 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HomeService, IHotel, UserService } from 'src/app/core';
+import { BookingPreviewComponent } from './booking-preview/booking-preview.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-hotel-lists',
@@ -18,8 +21,11 @@ export class HotelListsComponent implements OnInit, OnDestroy {
   constructor(
     private homeSvc: HomeService,
     private userSvc: UserService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
     this.homeSvc.getHotelsByLocationId(this.locationId).subscribe({
       next: (data) => {
@@ -41,18 +47,35 @@ export class HotelListsComponent implements OnInit, OnDestroy {
     hotel.activeTab != 0 && (hotel.showTabs = !hotel.showTabs);
     hotel.activeTab = 1;
   }
-  book() {
+
+  book(hotel: IHotel) {
     this.authSubscription = this.userSvc.isAuthenticated.subscribe(
       (isAuthenticated) => {
         if (isAuthenticated) {
-          window.alert('booking successful');
+          const dialogRef = this.dialog.open(BookingPreviewComponent, {
+            data: { hotel },
+            height: '85%',
+            width: '60%',
+            disableClose: true,
+            panelClass: 'booking-preview',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            result.status === 'success' &&
+              this._snackBar.open('Booking Successfull', 'Dismiss', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5000,
+              });
+          });
         } else {
           this.router.navigate(['/login']);
         }
       }
     );
   }
+
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
+    this.authSubscription?.unsubscribe();
   }
 }
