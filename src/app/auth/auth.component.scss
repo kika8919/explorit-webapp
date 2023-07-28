@@ -8,13 +8,15 @@ mat-form-field {
   margin-top: 10px;
 }
 
-.example-container {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  justify-items: center;
-  height: calc(100% - 12vh);
+  max-height: calc(100% - 12vh);
+  overflow-y: auto;
+  padding-top: 4.6875rem;
+  padding-bottom: 4.6875rem;
 }
 
 .customer-form {

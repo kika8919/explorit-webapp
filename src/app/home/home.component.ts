@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Category, Errors, HomeService, UserService, ILocation } from '../core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -15,7 +17,25 @@ export class HomeComponent implements OnInit {
   locations: ILocation[] = [];
   showCardGrid: boolean = false;
 
-  constructor(private homeSvc: HomeService, private userService: UserService) {}
+  constructor(
+    private homeSvc: HomeService,
+    private userService: UserService,
+    private breakpointObserver: BreakpointObserver
+  ) {}
+
+  cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return {
+          columns: 1,
+        };
+      }
+
+      return {
+        columns: 3,
+      };
+    })
+  );
 
   ngOnInit(): void {
     this.userService.isAuthenticated.subscribe((authenticated) => {

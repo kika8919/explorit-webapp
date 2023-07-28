@@ -43,3 +43,64 @@
   font-size: 0.6875rem;
   color: #7d7d7d;
 }
+
+@media (max-width: 768px) {
+  .dialog-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mdc-dialog__title::before {
+    height: 1.25rem !important;
+    display: flex;
+  }
+
+  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+    padding: 0px !important;
+  }
+
+  ::ng-deep .mat-vertical-content {
+    padding: 0px 10px 10px 10px !important;
+  }
+
+  .mat-stepper-vertical {
+    margin-top: 0.5rem;
+  }
+
+  .mat-mdc-form-field {
+    margin-top: 1rem;
+  }
+
+  .stepper-content {
+    background: #f0f0f0;
+    padding: 0.625rem !important;
+    margin-top: 0.5em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .thirdFormGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important;
+    &-field {
+      width: 65%;
+    }
+  }
+
+  .booking-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem !important;
+    align-items: flex-start !important;
+    padding: 20px !important;
+  }
+
+  .mat-caption {
+    font-weight: 400;
+    font-size: 0.6875rem;
+    color: #7d7d7d;
+  }
+}

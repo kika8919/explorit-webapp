@@ -5,10 +5,10 @@ $text-color: #070404;
 .toolbar {
   background-color: $primary-color;
   color: $text-color;
-  height: 55px;
+  height: 3.4375rem;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0px 20px;
   position: fixed;
   top: 0px;
   z-index: 10;
@@ -24,7 +24,7 @@ $text-color: #070404;
 
     &:hover {
       color: darken($text-color, 20%);
-      box-shadow: inset 120px 0 0 0 #d7fbfb;
+      box-shadow: inset 120px 0 0 0 #aae6e6;
       border-radius: 20px;
       padding: 4px;
     }
@@ -46,4 +46,13 @@ $text-color: #070404;
 
 .toolbar-space {
   width: 20px;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 0px 0px !important;
+    a {
+      margin-right: 0px !important;
+    }
+  }
 }

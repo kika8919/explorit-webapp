@@ -12,10 +12,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  gap: 20px;
 }
 
 .mat-hotel-card {
-  width: 80%;
   border-radius: 1.25rem;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .hotel-booking {
-  width: 30%;
+  width: 20%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -86,4 +86,90 @@
 
 .booking-preview {
   z-index: 9;
+}
+
+@media (max-width: 768px) {
+  .hotel-list {
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+    background-color: #fffcfc;
+  }
+
+  .hotel {
+    display: flex;
+    flex-direction: column;
+    height: fit-content !important;
+    gap: 0rem !important;
+    position: relative;
+  }
+
+  .hotel-img {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    border-radius: 0.25rem;
+    object-fit: cover;
+  }
+
+  .mat-hotel-card {
+    border-radius: 4px;
+    height: auto;
+    min-height: 20rem;
+  }
+
+  .hotel-info-desc {
+    position: absolute;
+    top: 7rem;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 0rem 0.25rem 0.25rem 0rem;
+
+    .hotel-name {
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 1rem;
+      max-width: 33vw;
+      white-space: nowrap;
+    }
+
+    .hotel-info {
+      width: 100%;
+      flex: 0.5;
+    }
+
+    .hotel-booking {
+      flex: 0.5;
+      background-color: #ececec;
+      width: 100%;
+    }
+  }
+
+  .hotel-img-desc-tab {
+    margin-top: 4.6875rem;
+  }
+
+  .overview-tab-content {
+    width: 95%;
+    padding: 0.3125rem;
+  }
+
+  .hotel-image-container {
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    width: 80.5vw !important;
+    display: flex;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    background-color: #fffcfc;
+  }
+
+  .hotel-image {
+    height: 30vh;
+    padding: 0px 2px 0px 2px;
+    flex-shrink: 1.5;
+    scroll-snap-align: start;
+  }
 }

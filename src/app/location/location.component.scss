@@ -112,8 +112,139 @@
     }
 
     .hotel-tab {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .hotel-list {
       padding: 1.5625rem;
       background-color: #fffcfc;
+      flex: 1;
     }
+
+    .hotel-map {
+      padding-top: 40px;
+      border: 1px solid #cccccc;
+    }
+  }
+}
+@media (max-width: 768px) {
+  /* Hide the default view for larger devices */
+  .location-details > mat-tab-group {
+    display: none;
+  }
+
+  .location {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 4.375rem;
+    padding-bottom: 4.6875rem;
+    margin: 10px;
+    background-color: #fffcfc;
+  }
+
+  .location .location-image-container {
+    width: 95vw !important;
+    display: flex;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    background-color: #fffcfc;
+  }
+
+  .location .location-image {
+    height: 30vh;
+    padding: 0px 2px 0px 2px;
+    flex-shrink: 1.5;
+    scroll-snap-align: start;
+  }
+
+  .location .location-details .overview {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: space-between;
+
+    .overview-info {
+      background-color: #fffcfc;
+      width: 90vw;
+    }
+  }
+
+  .location .location-details .table-padding {
+    padding-top: 0px !important;
+    padding-bottom: 10px;
+    background-color: #fffcfc;
+  }
+
+  .location .location-details .mat-column-key {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 32% !important;
+    width: 32% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    background-color: #fffcfc;
+  }
+
+  .location .location-details .mat-column-value {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 68% !important;
+    width: 68% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    background-color: #fffcfc;
+  }
+
+  .accordion {
+    width: 95vw; /* Adjust the width as per your preference */
+    margin-top: 20px; /* Adjust the margin as per your preference */
+  }
+
+  .accordion-item {
+    margin-bottom: 10px; /* Add some spacing between accordion items */
+    border: 1px solid #ccc; /* Add a border to separate accordion items */
+    border-radius: 5px; /* Add some border-radius for a more modern look */
+  }
+
+  .accordion-header {
+    padding: 10px 0px 10px 20px; /* Add padding to the accordion headers */
+    font-size: 18px; /* Adjust the font size as per your preference */
+    font-weight: bold; /* Make the headers bold */
+    cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+  }
+
+  .accordion-content {
+    padding: 10px; /* Add padding to the accordion content */
+  }
+
+  .location .location-details .hotel-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .location .location-details .hotel-list {
+    padding: 0px !important;
+    background-color: #fffcfc;
+    flex: 1;
+  }
+
+  .location .location-details .hotel-map {
+    padding-top: 0px !important;
+    border: 1px solid #cccccc;
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService, IBooking, User, UserService } from '../core';
 import * as moment from 'moment-timezone';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs';
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.component.html',
@@ -15,10 +17,20 @@ export class BookingsComponent implements OnInit {
   expandedIndex = 0;
   constructor(
     private userSvc: UserService,
-    private bookingSvc: BookingService
+    private bookingSvc: BookingService,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.currentUser = this.userSvc.getCurrentUser();
   }
+
+  isMobileView = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return true;
+      }
+      return false;
+    })
+  );
 
   ngOnInit(): void {
     this.bookingSvc.getAllBookingsByEmail(this.currentUser.email).subscribe({

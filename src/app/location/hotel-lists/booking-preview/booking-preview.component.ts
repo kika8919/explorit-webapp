@@ -1,6 +1,8 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { map } from 'rxjs';
 import {
   BookingService,
   IBooking,
@@ -43,10 +45,20 @@ export class BookingPreviewComponent implements OnInit {
     private dialogRef: MatDialogRef<BookingPreviewComponent>,
     private bookingSvc: BookingService,
     private userSvc: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: { hotel: IHotel }
+    @Inject(MAT_DIALOG_DATA) public data: { hotel: IHotel },
+    private breakpointObserver: BreakpointObserver
   ) {
     this.minDate = new Date();
   }
+
+  isMobileView = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return true;
+      }
+      return false;
+    })
+  );
 
   ngOnInit(): void {
     this.currUser = this.userSvc.getCurrentUser();

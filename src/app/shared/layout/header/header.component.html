@@ -1,9 +1,20 @@
 <mat-toolbar class="toolbar">
   <div class="toolbar-space"></div>
-
-  <a routerLink="/"
-    ><span style="font-family: cursive; font-weight: bold">Xplorit</span></a
-  >
+  <div>
+    <img
+      src="/assets/xplorite.jpg"
+      width="35px"
+      height="35px"
+      style="padding-top: 10px; border-radius: 20px"
+      alt="xplorite-logo"
+    />
+  </div>
+  &nbsp;
+  <div>
+    <span style="font-family: cursive; font-weight: bold; padding-top: 20px"
+      >Xplorit</span
+    >
+  </div>
   <span class="example-spacer"></span>
   <div class="nav-right" *appShowAuthed="false">
     <a routerLink="/"> Home </a>
@@ -19,6 +30,7 @@
   <div class="nav-right" *appShowAuthed="true">
     <a routerLink="/"> Home </a>
     <a routerLink="/bookings"> Bookings </a>
+    <a routerLink="/" (click)="logout()"> Logout </a>
   </div>
   <div class="toolbar-space"></div>
 </mat-toolbar>

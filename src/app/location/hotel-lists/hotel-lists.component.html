@@ -1,141 +1,287 @@
 <div *ngFor="let hotel of hotels" class="hotel-list">
-  <mat-card class="mat-hotel-card">
-    <div class="hotel">
-      <div style="width: 40%">
-        <img
-          [src]="hotel.images[0].url"
-          style="width: 370px; border-radius: 1.25rem; height: 250px"
-        />
+  <div *ngIf="!(isMobileView | async)">
+    <mat-card class="mat-hotel-card">
+      <div class="hotel">
+        <div style="width: 40%">
+          <img
+            [src]="hotel.images[0].url"
+            style="width: 23.125rem; border-radius: 1.25rem; height: 15.625rem"
+          />
+        </div>
+        <div class="hotel-info">
+          <h3 style="font-weight: bold; margin-bottom: 0px !important">
+            {{ hotel.name }}
+          </h3>
+          <div style="padding-bottom: 20px">
+            <span
+              class="star"
+              *ngIf="hotel.starRating >= 1"
+              [ngClass]="{ filled: hotel.starRating >= 1 }"
+              >&#9733;</span
+            >
+            <span
+              *ngIf="hotel.starRating >= 1.5"
+              class="star"
+              [ngClass]="{
+                filled: hotel.starRating >= 1.5
+              }"
+              >&#9733;</span
+            >
+            <span
+              *ngIf="hotel.starRating >= 2.5"
+              class="star"
+              [ngClass]="{
+                filled: hotel.starRating >= 2.5
+              }"
+              >&#9733;</span
+            >
+            <span
+              *ngIf="hotel.starRating >= 3.5"
+              class="star"
+              [ngClass]="{
+                filled: hotel.starRating >= 3.5
+              }"
+              >&#9733;</span
+            >
+            <span
+              *ngIf="hotel.starRating >= 4.5"
+              class="star"
+              [ngClass]="{
+                filled: hotel.starRating >= 4.5
+              }"
+              >&#9733;
+            </span>
+            Hotel
+          </div>
+          <div class="show-description" (click)="showDescription(hotel)">
+            <p>
+              <strong>{{ hotel.distanceFromCity }}</strong> from city center
+            </p>
+            <p>
+              <mat-icon class="material-symbols-outlined">
+                expand_more
+              </mat-icon>
+            </p>
+          </div>
+          <div class="show-photos" (click)="showPhotos(hotel)">
+            <p>{{ hotel.images.length }} Photos for this property</p>
+            <p>
+              <mat-icon class="material-symbols-outlined">
+                expand_more
+              </mat-icon>
+            </p>
+          </div>
+        </div>
+        <div class="hotel-booking">
+          <div class="time-price">
+            <p>
+              <strong>Check-in:</strong>
+              {{
+                hotel.checkIn >= 12
+                  ? 24 - hotel.checkIn + ":00 PM"
+                  : hotel.checkIn + ":00 AM"
+              }}
+            </p>
+            <p>
+              <strong>Check-out:</strong>
+              {{
+                hotel.checkOut >= 12
+                  ? 24 - hotel.checkOut + ":00 PM"
+                  : hotel.checkOut + ":00 AM"
+              }}
+            </p>
+            <p><strong>Price:</strong> &#8377; {{ hotel.price }}</p>
+          </div>
+          <button
+            mat-flat-button
+            style="font-weight: bold; color: blue"
+            (click)="book(hotel)"
+          >
+            BOOK NOW
+          </button>
+        </div>
       </div>
-      <div class="hotel-info">
-        <h3 style="font-weight: bold; margin-bottom: 0px !important">
-          {{ hotel.name }}
-        </h3>
-        <div style="padding-bottom: 20px">
-          <span
-            class="star"
-            *ngIf="hotel.starRating >= 1"
-            [ngClass]="{ filled: hotel.starRating >= 1 }"
-            >&#9733;</span
-          >
-          <span
-            *ngIf="hotel.starRating >= 1.5"
-            class="star"
-            [ngClass]="{
-              filled: hotel.starRating >= 1.5
-            }"
-            >&#9733;</span
-          >
-          <span
-            *ngIf="hotel.starRating >= 2.5"
-            class="star"
-            [ngClass]="{
-              filled: hotel.starRating >= 2.5
-            }"
-            >&#9733;</span
-          >
-          <span
-            *ngIf="hotel.starRating >= 3.5"
-            class="star"
-            [ngClass]="{
-              filled: hotel.starRating >= 3.5
-            }"
-            >&#9733;</span
-          >
-          <span
-            *ngIf="hotel.starRating >= 4.5"
-            class="star"
-            [ngClass]="{
-              filled: hotel.starRating >= 4.5
-            }"
-            >&#9733;
-          </span>
-          Hotel
-        </div>
-        <div class="show-description" (click)="showDescription(hotel)">
-          <p>
-            <strong>{{ hotel.distanceFromCity }}</strong> from city center
-          </p>
-          <p>
-            <mat-icon class="material-symbols-outlined"> expand_more </mat-icon>
-          </p>
-        </div>
-        <div class="show-photos" (click)="showPhotos(hotel)">
-          <p>{{ hotel.images.length }} Photos for this property</p>
-          <p>
-            <mat-icon class="material-symbols-outlined"> expand_more </mat-icon>
-          </p>
-        </div>
-      </div>
-      <div class="hotel-booking">
-        <div class="time-price">
-          <p>
-            <strong>Check-in:</strong>
-            {{
-              hotel.checkIn >= 12
-                ? 24 - hotel.checkIn + ":00 PM"
-                : hotel.checkIn + ":00 AM"
-            }}
-          </p>
-          <p>
-            <strong>Check-out:</strong>
-            {{
-              hotel.checkOut >= 12
-                ? 24 - hotel.checkOut + ":00 PM"
-                : hotel.checkOut + ":00 AM"
-            }}
-          </p>
-          <p><strong>Price:</strong> &#8377; {{ hotel.price }}</p>
-        </div>
-        <button
-          mat-flat-button
-          style="font-weight: bold; color: blue"
-          (click)="book(hotel)"
+      <div *ngIf="hotel.showTabs">
+        <mat-tab-group
+          #tabGroup
+          mat-stretch-tabs="false"
+          mat-align-tabs="center"
+          [selectedIndex]="hotel.activeTab"
         >
-          BOOK NOW
-        </button>
+          <mat-tab label="Description" labelClass="overview-tab">
+            <div class="overview-tab-content">
+              <h4 style="font-weight: bold">About {{ hotel.name }}</h4>
+              <div>{{ hotel.description }}</div>
+              <h4 style="font-weight: bold; padding-top: 1rem">
+                Top Amenities
+              </h4>
+              <mat-grid-list cols="4" rowHeight="8:1">
+                <mat-grid-tile *ngFor="let amenity of hotel.amenities">
+                  <p>
+                    <span style="font-weight: 800">&nbsp;&#8226;&nbsp;</span>
+                    {{ amenity }}
+                  </p>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="Photos" labelClass="overview-tab">
+            <div class="photos">
+              <mat-grid-list cols="3" rowHeight="3:2" gutterSize="10px">
+                <mat-grid-tile *ngFor="let photo of hotel.images">
+                  <img
+                    style="
+                      width: 21vw;
+                      height: 28vh;
+                      border-radius: 25px;
+                      padding-top: 0.125rem;
+                    "
+                    [src]="photo.url"
+                    alt="Hotel Photo"
+                  /> </mat-grid-tile
+              ></mat-grid-list>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </div>
-    </div>
-    <div *ngIf="hotel.showTabs">
-      <mat-tab-group
-        #tabGroup
-        mat-stretch-tabs="false"
-        mat-align-tabs="center"
-        [selectedIndex]="hotel.activeTab"
-      >
-        <mat-tab label="Description" labelClass="overview-tab">
-          <div class="overview-tab-content">
-            <h4 style="font-weight: bold">About {{ hotel.name }}</h4>
-            <div>{{ hotel.description }}</div>
-            <h4 style="font-weight: bold; padding-top: 1rem">Top Amenities</h4>
-            <mat-grid-list cols="4" rowHeight="8:1">
-              <mat-grid-tile *ngFor="let amenity of hotel.amenities">
-                <p>
-                  <span style="font-weight: 800">&nbsp;&#8226;&nbsp;</span>
-                  {{ amenity }}
-                </p>
-              </mat-grid-tile>
-            </mat-grid-list>
+    </mat-card>
+  </div>
+  <div *ngIf="isMobileView | async">
+    <mat-card class="mat-hotel-card">
+      <div class="hotel">
+        <img [src]="hotel.images[0].url" class="hotel-img" />
+        <div class="hotel-info-desc">
+          <div class="hotel-info">
+            <div class="hotel-name">
+              <p [matTooltip]="hotel.name" matTooltipPosition="left">
+                {{ hotel.name }}
+              </p>
+            </div>
+            <div style="padding-bottom: 20px">
+              <span
+                class="star"
+                *ngIf="hotel.starRating >= 1"
+                [ngClass]="{ filled: hotel.starRating >= 1 }"
+                >&#9733;</span
+              >
+              <span
+                *ngIf="hotel.starRating >= 1.5"
+                class="star"
+                [ngClass]="{
+                  filled: hotel.starRating >= 1.5
+                }"
+                >&#9733;</span
+              >
+              <span
+                *ngIf="hotel.starRating >= 2.5"
+                class="star"
+                [ngClass]="{
+                  filled: hotel.starRating >= 2.5
+                }"
+                >&#9733;</span
+              >
+              <span
+                *ngIf="hotel.starRating >= 3.5"
+                class="star"
+                [ngClass]="{
+                  filled: hotel.starRating >= 3.5
+                }"
+                >&#9733;</span
+              >
+              <span
+                *ngIf="hotel.starRating >= 4.5"
+                class="star"
+                [ngClass]="{
+                  filled: hotel.starRating >= 4.5
+                }"
+                >&#9733;
+              </span>
+              Hotel
+            </div>
+            <div class="show-description" (click)="showDescription(hotel)">
+              <p>
+                <strong>{{ hotel.distanceFromCity }}</strong> from city center
+              </p>
+              <p>
+                <mat-icon class="material-symbols-outlined">
+                  expand_more
+                </mat-icon>
+              </p>
+            </div>
+            <div class="show-photos" (click)="showPhotos(hotel)">
+              <p>{{ hotel.images.length }} Photos for this property</p>
+              <p>
+                <mat-icon class="material-symbols-outlined">
+                  expand_more
+                </mat-icon>
+              </p>
+            </div>
           </div>
-        </mat-tab>
-        <mat-tab label="Photos" labelClass="overview-tab">
-          <div class="photos">
-            <mat-grid-list cols="3" rowHeight="3:2" gutterSize="10px">
-              <mat-grid-tile *ngFor="let photo of hotel.images">
-                <img
-                  style="
-                    width: 21vw;
-                    height: 28vh;
-                    border-radius: 25px;
-                    padding-top: 0.125rem;
-                  "
-                  [src]="photo.url"
-                  alt="Hotel Photo"
-                /> </mat-grid-tile
-            ></mat-grid-list>
+          <div class="hotel-booking">
+            <div class="time-price">
+              <p>
+                <strong>CheckIn:</strong>
+                {{
+                  hotel.checkIn >= 12
+                    ? 24 - hotel.checkIn + ":00 PM"
+                    : hotel.checkIn + ":00 AM"
+                }}
+              </p>
+              <p>
+                <strong>CheckOut:</strong>
+                {{
+                  hotel.checkOut >= 12
+                    ? 24 - hotel.checkOut + ":00 PM"
+                    : hotel.checkOut + ":00 AM"
+                }}
+              </p>
+              <p><strong>Price:</strong> &#8377; {{ hotel.price }}</p>
+            </div>
+            <button
+              mat-flat-button
+              style="font-weight: bold; color: blue"
+              (click)="book(hotel)"
+            >
+              BOOK NOW
+            </button>
           </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-  </mat-card>
+        </div>
+      </div>
+      <div *ngIf="hotel.showTabs" class="hotel-img-desc-tab">
+        <mat-tab-group
+          #tabGroup
+          mat-stretch-tabs="false"
+          mat-align-tabs="center"
+          [selectedIndex]="hotel.activeTab"
+        >
+          <mat-tab label="Description" labelClass="overview-tab">
+            <div class="overview-tab-content">
+              <h4 style="font-weight: bold">About {{ hotel.name }}</h4>
+              <div>{{ hotel.description }}</div>
+              <h4 style="font-weight: bold; padding-top: 1rem">
+                Top Amenities
+              </h4>
+              <mat-grid-list cols="1" rowHeight="10:1">
+                <mat-grid-tile *ngFor="let amenity of hotel.amenities">
+                  <p>
+                    <span style="font-weight: 800; word-wrap: break-word"
+                      >&nbsp;&#8226;&nbsp;</span
+                    >
+                    {{ amenity }}
+                  </p>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+          </mat-tab>
+          <mat-tab label="Photos" labelClass="overview-tab">
+            <div class="hotel-image-container">
+              <div *ngFor="let image of hotel.images">
+                <img class="hotel-image" [src]="image.url" />
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card>
+  </div>
 </div>

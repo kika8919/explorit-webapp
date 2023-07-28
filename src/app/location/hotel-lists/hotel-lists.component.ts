@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { HomeService, IHotel, UserService } from 'src/app/core';
 import { BookingPreviewComponent } from './booking-preview/booking-preview.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-hotel-lists',
@@ -23,8 +24,18 @@ export class HotelListsComponent implements OnInit, OnDestroy {
     private userSvc: UserService,
     private router: Router,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver
   ) {}
+
+  isMobileView = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return true;
+      }
+      return false;
+    })
+  );
 
   ngOnInit(): void {
     this.homeSvc.getHotelsByLocationId(this.locationId).subscribe({
@@ -54,8 +65,8 @@ export class HotelListsComponent implements OnInit, OnDestroy {
         if (isAuthenticated) {
           const dialogRef = this.dialog.open(BookingPreviewComponent, {
             data: { hotel },
-            height: '85%',
-            width: '60%',
+            height: this.isMobileView ? '67%' : '85%',
+            width: this.isMobileView ? '100%' : '65%',
             disableClose: true,
             panelClass: 'booking-preview',
           });

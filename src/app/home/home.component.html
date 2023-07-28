@@ -6,7 +6,7 @@
         showCardGrid ? 'home-card-half-height' : 'home-card-full-height'
       "
     >
-      <mat-form-field style="width: 40rem">
+      <mat-form-field class="input-where-to">
         <mat-label>Where To?</mat-label>
         <mat-select
           [(ngModel)]="selectedCategory"
@@ -25,7 +25,11 @@
     </mat-card>
   </div>
   <div class="grid-card" *ngIf="showCardGrid">
-    <mat-grid-list cols="3" rowHeight="1.5:1" gutterSize=".9375rem">
+    <mat-grid-list
+      cols="{{ (cardLayout | async)?.columns }}"
+      rowHeight="1.5:1"
+      gutterSize=".9375rem"
+    >
       <mat-grid-tile
         *ngFor="let location of locations"
         style="background-image: url('{{ location.images[0].url }}')"

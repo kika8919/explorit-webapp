@@ -4,203 +4,431 @@
     <mat-icon mat-dialog-close style="cursor: pointer">close</mat-icon>
   </div>
 </div>
-<mat-dialog-content class="mat-typography">
-  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="durationOfStay">
-      <form [formGroup]="durationOfStay">
-        <ng-template matStepLabel>Duration of Stay</ng-template>
-        <div class="stepper-content">
-          <mat-form-field>
-            <mat-label>Select a date range</mat-label>
-            <mat-date-range-input
-              [rangePicker]="picker"
-              [disabled]="true"
-              required
-              [min]="minDate"
-            >
-              <input
-                matStartDate
-                formControlName="start"
-                placeholder="Start date"
-              />
-              <input matEndDate formControlName="end" placeholder="End date" />
-            </mat-date-range-input>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-date-range-picker
-              [disabled]="false"
-              #picker
-            ></mat-date-range-picker>
+<div *ngIf="!(isMobileView | async)">
+  <mat-dialog-content class="mat-typography">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="durationOfStay">
+        <form [formGroup]="durationOfStay">
+          <ng-template matStepLabel>Duration of Stay</ng-template>
+          <div class="stepper-content">
+            <mat-form-field>
+              <mat-label>Select a date range</mat-label>
+              <mat-date-range-input
+                [rangePicker]="picker"
+                [disabled]="true"
+                required
+                [min]="minDate"
+              >
+                <input
+                  matStartDate
+                  formControlName="start"
+                  placeholder="Start date"
+                />
+                <input
+                  matEndDate
+                  formControlName="end"
+                  placeholder="End date"
+                />
+              </mat-date-range-input>
+              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker
+                [disabled]="false"
+                #picker
+              ></mat-date-range-picker>
 
-            <mat-error
-              *ngIf="
-                durationOfStay.controls.start.hasError('matStartDateInvalid')
-              "
-              >Invalid start date</mat-error
-            >
-            <mat-error
-              *ngIf="durationOfStay.controls.end.hasError('matEndDateInvalid')"
-              >Invalid end date</mat-error
-            >
-            <mat-error
-              *ngIf="
-                durationOfStay.touched && durationOfStay.hasError('required')
-              "
-              >Please select a date range</mat-error
-            >
-          </mat-form-field>
-          <div style="display: flex; gap: 1.25rem">
-            <button mat-raised-button matStepperNext>Next</button>
+              <mat-error
+                *ngIf="
+                  durationOfStay.controls.start.hasError('matStartDateInvalid')
+                "
+                >Invalid start date</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  durationOfStay.controls.end.hasError('matEndDateInvalid')
+                "
+                >Invalid end date</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  durationOfStay.touched && durationOfStay.hasError('required')
+                "
+                >Please select a date range</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperNext>Next</button>
+            </div>
           </div>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Guests Count</ng-template>
-        <div class="stepper-content">
-          <mat-form-field>
-            <mat-label>Adults</mat-label>
-            <mat-select formControlName="headCount" required>
-              <mat-option *ngFor="let count of adultCount" [value]="count">
-                {{ count }}
-              </mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="secondFormGroup.controls.headCount.hasError('required')"
-              >Please select a value</mat-error
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Guests Count</ng-template>
+          <div class="stepper-content">
+            <mat-form-field>
+              <mat-label>Adults</mat-label>
+              <mat-select formControlName="headCount" required>
+                <mat-option *ngFor="let count of adultCount" [value]="count">
+                  {{ count }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="secondFormGroup.controls.headCount.hasError('required')"
+                >Please select a value</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button mat-raised-button matStepperNext>Next</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Contact Details</ng-template>
+          <div class="stepper-content thirdFormGroup">
+            <mat-form-field class="thirdFormGroup-field">
+              <mat-label>Contact Number</mat-label>
+              <input
+                matInput
+                formControlName="contactNo"
+                placeholder="1122334455"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  thirdFormGroup.controls.contactNo.touched &&
+                  thirdFormGroup.controls.contactNo.hasError('required')
+                "
+                >Please enter contact number</mat-error
+              >
+              <mat-error
+                *ngIf="thirdFormGroup.controls.contactNo.hasError('pattern')"
+                >Enter valid 10 digit number</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="thirdFormGroup-field">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="jon_doe@gmail.com"
+              />
+              <mat-error *ngIf="thirdFormGroup.controls.email.hasError('email')"
+                >Please enter valid email</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button
+                mat-raised-button
+                matStepperNext
+                (click)="calcTotalCost()"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Booking Preview</ng-template>
+        <mat-icon style="margin-bottom: -5px; color: #fdc430">info</mat-icon
+        >&nbsp;Review details below before confirming the booking.
+        <div class="stepper-content booking-preview">
+          <div style="display: flex; flex-direction: column">
+            <span class="mat-caption">
+              {{ "Hotel:" }}
+            </span>
+            <span class="mat-body1">
+              {{ data.hotel.name }}
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: row; gap: 3.125rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">
+                {{ "CheckIn: " }}
+              </span>
+              <span class="mat-body1">
+                {{ durationOfStay.controls.start.value | date : "longDate" }}
+              </span>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">
+                {{ "CheckOut: " }}
+              </span>
+              <span class="mat-body1">
+                {{ durationOfStay.controls.end.value | date : "longDate" }}
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <span class="mat-caption">{{ "No of Guests:" }}</span>
+            <span class="mat-body1">
+              {{ secondFormGroup.controls.headCount.value }}
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: row; gap: 3.125rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">{{ "Contact Details:" }}</span>
+              <span class="mat-body1">
+                {{ thirdFormGroup.controls.contactNo.value }}
+              </span>
+            </div>
+            <div
+              *ngIf="thirdFormGroup.controls.email.value"
+              style="display: flex; flex-direction: column"
             >
-          </mat-form-field>
+              <span class="mat-caption">{{ "Email:" }}</span>
+              <span class="mat-body1">{{
+                thirdFormGroup.controls.email.value
+              }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: row; gap: 3.125rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption"
+                >{{ "Total Cost" }} &nbsp;<mat-icon
+                  style="
+                    font-weight: 400;
+                    font-size: 0.6875rem;
+                    margin-bottom: -0.875rem;
+                  "
+                  matTooltipPosition="right"
+                  matTooltip="Hotel Price/per night X Rooms X Booking Duration"
+                  >info</mat-icon
+                ></span
+              >
+              <span class="mat-body1"> &#8377;&nbsp;{{ totalCost }} </span>
+            </div>
+          </div>
           <div style="display: flex; gap: 1.25rem">
             <button mat-raised-button matStepperPrevious>Back</button>
-            <button mat-raised-button matStepperNext>Next</button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Contact Details</ng-template>
-        <div class="stepper-content thirdFormGroup">
-          <mat-form-field class="thirdFormGroup-field">
-            <mat-label>Contact Number</mat-label>
-            <input
-              matInput
-              formControlName="contactNo"
-              placeholder="1122334455"
-              required
-            />
-            <mat-error
-              *ngIf="
-                thirdFormGroup.controls.contactNo.touched &&
-                thirdFormGroup.controls.contactNo.hasError('required')
-              "
-              >Please enter contact number</mat-error
-            >
-            <mat-error
-              *ngIf="thirdFormGroup.controls.contactNo.hasError('pattern')"
-              >Enter valid 10 digit number</mat-error
-            >
-          </mat-form-field>
-          <mat-form-field class="thirdFormGroup-field">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              formControlName="email"
-              placeholder="jon_doe@gmail.com"
-            />
-            <mat-error *ngIf="thirdFormGroup.controls.email.hasError('email')"
-              >Please enter valid email</mat-error
-            >
-          </mat-form-field>
-          <div style="display: flex; gap: 1.25rem">
-            <button mat-raised-button matStepperPrevious>Back</button>
-            <button mat-raised-button matStepperNext (click)="calcTotalCost()">
-              Next
+            <button mat-raised-button (click)="confirmBooking()">
+              Confirm
             </button>
           </div>
         </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Booking Preview</ng-template>
-      <mat-icon style="margin-bottom: -5px; color: #fdc430">info</mat-icon
-      >&nbsp;Review details below before conforming the booking.
-      <div class="stepper-content booking-preview">
-        <div style="display: flex; flex-direction: column">
-          <span class="mat-caption">
-            {{ "Hotel:" }}
-          </span>
-          <span class="mat-body1">
-            {{ data.hotel.name }}
-          </span>
-        </div>
-        <div style="display: flex; flex-direction: row; gap: 3.125rem">
-          <div style="display: flex; flex-direction: column">
-            <span class="mat-caption">
-              {{ "CheckIn: " }}
-            </span>
-            <span class="mat-body1">
-              {{ durationOfStay.controls.start.value | date : "longDate" }}
-            </span>
-          </div>
-          <div style="display: flex; flex-direction: column">
-            <span class="mat-caption">
-              {{ "CheckOut: " }}
-            </span>
-            <span class="mat-body1">
-              {{ durationOfStay.controls.end.value | date : "longDate" }}
-            </span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: column">
-          <span class="mat-caption">{{ "No of Guests:" }}</span>
-          <span class="mat-body1">
-            {{ secondFormGroup.controls.headCount.value }}
-          </span>
-        </div>
-        <div style="display: flex; flex-direction: row; gap: 3.125rem">
-          <div style="display: flex; flex-direction: column">
-            <span class="mat-caption">{{ "Contact Details:" }}</span>
-            <span class="mat-body1">
-              {{ thirdFormGroup.controls.contactNo.value }}
-            </span>
-          </div>
-          <div
-            *ngIf="thirdFormGroup.controls.email.value"
-            style="display: flex; flex-direction: column"
-          >
-            <span class="mat-caption">{{ "Email:" }}</span>
-            <span class="mat-body1">{{
-              thirdFormGroup.controls.email.value
-            }}</span>
-          </div>
-        </div>
-        <div style="display: flex; flex-direction: row; gap: 3.125rem">
-          <div style="display: flex; flex-direction: column">
-            <span class="mat-caption"
-              >{{ "Total Cost" }} &nbsp;<mat-icon
-                style="
-                  font-weight: 400;
-                  font-size: 0.6875rem;
-                  margin-bottom: -0.875rem;
+      </mat-step>
+    </mat-stepper>
+  </mat-dialog-content>
+</div>
+
+<div *ngIf="isMobileView | async">
+  <mat-dialog-content class="mat-typography">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="durationOfStay">
+        <form [formGroup]="durationOfStay">
+          <ng-template matStepLabel>Duration of Stay</ng-template>
+          <div class="stepper-content">
+            <mat-form-field style="width: 65vw">
+              <mat-label>Select a date range</mat-label>
+              <mat-date-range-input
+                [rangePicker]="picker"
+                [disabled]="true"
+                required
+                [min]="minDate"
+              >
+                <input
+                  matStartDate
+                  formControlName="start"
+                  placeholder="Start date"
+                />
+                <input
+                  matEndDate
+                  formControlName="end"
+                  placeholder="End date"
+                />
+              </mat-date-range-input>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker
+                [disabled]="false"
+                #picker
+              ></mat-date-range-picker>
+
+              <mat-error
+                *ngIf="
+                  durationOfStay.controls.start.hasError('matStartDateInvalid')
                 "
-                matTooltipPosition="right"
-                matTooltip="Hotel Price/per night X Rooms X Booking Duration"
-                >info</mat-icon
-              ></span
+                >Invalid start date</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  durationOfStay.controls.end.hasError('matEndDateInvalid')
+                "
+                >Invalid end date</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  durationOfStay.touched && durationOfStay.hasError('required')
+                "
+                >Please select a date range</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperNext>Next</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Guests Count</ng-template>
+          <div class="stepper-content">
+            <mat-form-field>
+              <mat-label>Adults</mat-label>
+              <mat-select formControlName="headCount" required>
+                <mat-option *ngFor="let count of adultCount" [value]="count">
+                  {{ count }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="secondFormGroup.controls.headCount.hasError('required')"
+                >Please select a value</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button mat-raised-button matStepperNext>Next</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Contact Details</ng-template>
+          <div class="stepper-content thirdFormGroup">
+            <mat-form-field class="thirdFormGroup-field">
+              <mat-label>Contact Number</mat-label>
+              <input
+                matInput
+                formControlName="contactNo"
+                placeholder="1122334455"
+                required
+              />
+              <mat-error
+                *ngIf="
+                  thirdFormGroup.controls.contactNo.touched &&
+                  thirdFormGroup.controls.contactNo.hasError('required')
+                "
+                >Please enter contact number</mat-error
+              >
+              <mat-error
+                *ngIf="thirdFormGroup.controls.contactNo.hasError('pattern')"
+                >Enter valid 10 digit number</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="thirdFormGroup-field">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="jon_doe@gmail.com"
+              />
+              <mat-error *ngIf="thirdFormGroup.controls.email.hasError('email')"
+                >Please enter valid email</mat-error
+              >
+            </mat-form-field>
+            <div style="display: flex; gap: 1.25rem">
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button
+                mat-raised-button
+                matStepperNext
+                (click)="calcTotalCost()"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Booking Preview</ng-template>
+        <mat-icon style="margin-bottom: -5px; color: #fdc430">info</mat-icon
+        >&nbsp;Review details below before confirming the booking.
+        <div class="stepper-content booking-preview">
+          <div style="display: flex; flex-direction: column">
+            <span class="mat-caption">
+              {{ "Hotel:" }}
+            </span>
+            <span class="mat-body1">
+              {{ data.hotel.name }}
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">
+                {{ "CheckIn: " }}
+              </span>
+              <span class="mat-body1">
+                {{ durationOfStay.controls.start.value | date : "longDate" }}
+              </span>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">
+                {{ "CheckOut: " }}
+              </span>
+              <span class="mat-body1">
+                {{ durationOfStay.controls.end.value | date : "longDate" }}
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <span class="mat-caption">{{ "No of Guests:" }}</span>
+            <span class="mat-body1">
+              {{ secondFormGroup.controls.headCount.value }}
+            </span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption">{{ "Contact Details:" }}</span>
+              <span class="mat-body1">
+                {{ thirdFormGroup.controls.contactNo.value }}
+              </span>
+            </div>
+            <div
+              *ngIf="thirdFormGroup.controls.email.value"
+              style="display: flex; flex-direction: column"
             >
-            <span class="mat-body1"> &#8377;&nbsp;{{ totalCost }} </span>
+              <span class="mat-caption">{{ "Email:" }}</span>
+              <span class="mat-body1">{{
+                thirdFormGroup.controls.email.value
+              }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: row; gap: 0.5rem">
+            <div style="display: flex; flex-direction: column">
+              <span class="mat-caption"
+                >{{ "Total Cost" }} &nbsp;<mat-icon
+                  style="
+                    font-weight: 400;
+                    font-size: 0.6875rem;
+                    margin-bottom: -0.875rem;
+                  "
+                  matTooltipPosition="right"
+                  matTooltip="Hotel Price/per night X Rooms X Booking Duration"
+                  >info</mat-icon
+                ></span
+              >
+              <span class="mat-body1"> &#8377;&nbsp;{{ totalCost }} </span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1.25rem">
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button (click)="confirmBooking()">
+              Confirm
+            </button>
           </div>
         </div>
-        <div style="display: flex; gap: 1.25rem">
-          <button mat-raised-button matStepperPrevious>Back</button>
-          <button mat-raised-button (click)="confirmBooking()">Confirm</button>
-        </div>
-      </div>
-    </mat-step>
-  </mat-stepper>
-</mat-dialog-content>
+      </mat-step>
+    </mat-stepper>
+  </mat-dialog-content>
+</div>
