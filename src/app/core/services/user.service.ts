@@ -57,8 +57,10 @@ export class UserService {
     const route = type === 'login' ? '/login' : '/register';
     return this.apiService.post(`/user${route}`, { user: credentials }).pipe(
       map((data) => {
-        this.setAuth(data.user);
-        return data;
+        if(type === 'login'){
+          this.setAuth(data.user);
+          return data;
+        }
       })
     );
   }
